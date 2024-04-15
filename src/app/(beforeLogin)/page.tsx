@@ -4,6 +4,7 @@ import logoImg from "@/assets/logo.svg";
 import styles from "./page.css";
 
 import Button from "@/components/uis/atoms/Button";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -16,9 +17,13 @@ const LoginPage = () => {
         <h1 className={styles.h1}>지금 일어나고 있는 일</h1>
         <div className={styles.comment}>
           <p className={styles.joinComment}>지금 가입하세요.</p>
-          <Button>계정 만들기</Button>
+          <Link href={"/i/flow/signup"}>
+            <Button>계정 만들기</Button>
+          </Link>
           <p className={styles.loginComment}>이미 티위터에 가입하셨나요?</p>
-          <Button variant="text">로그인</Button>
+          <Link href={"/login"}>
+            <Button variant="text">로그인</Button>
+          </Link>
         </div>
       </div>
     </div>
