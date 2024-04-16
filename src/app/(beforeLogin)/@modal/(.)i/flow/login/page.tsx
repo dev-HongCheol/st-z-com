@@ -1,5 +1,11 @@
+import Login from "@/app/(beforeLogin)/_component/login/Login";
+
 const LoginPage = () => {
-  return <>login modal11</>;
+  return (
+    <>
+      <Login />
+    </>
+  );
 };
 
 export default LoginPage;

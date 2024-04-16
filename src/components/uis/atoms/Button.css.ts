@@ -2,16 +2,16 @@ import { recipe } from "@vanilla-extract/recipes";
 
 export const button = recipe({
   base: {
-    borderRadius: "1rem",
-    border: "1px solid",
     width: "100%",
     cursor: "pointer",
   },
 
   variants: {
-    color: {
-      primary: {
+    variant: {
+      contained: {
         background: "rgb(29, 155, 240)",
+        borderRadius: "1rem",
+        border: "1px solid",
         color: "white",
         borderColor: "rgba(0, 0, 0, 0)",
         ":hover": {
@@ -19,6 +19,15 @@ export const button = recipe({
         },
       },
       text: {
+        background: "rgba(0, 0, 0, 0)",
+        border: "none",
+        ":hover": {
+          background: "rgba(0, 0, 0, 0.05)",
+        },
+      },
+      outlined: {
+        borderRadius: "1rem",
+        border: "1px solid",
         background: "rgba(0, 0, 0, 0)",
         borderColor: "rgb(29, 155, 240)",
         ":hover": {
@@ -31,21 +40,27 @@ export const button = recipe({
       medium: { padding: 10 },
       large: { padding: 24 },
     },
+    padding: {
+      none: {},
+      rounded: {
+        ":hover": {
+          background: "rgba(0, 0, 0, 0.05)",
+          margin: "2rem",
+        },
+      },
+    },
 
     compoundVariants: [
       {
         variants: {
-          color: "neutral",
+          color: "contained",
           size: "large",
-        },
-        style: {
-          background: "ghostwhite",
         },
       },
     ],
 
     defaultVariants: {
-      color: "primary",
+      color: "contained",
       size: "medium",
     },
   },

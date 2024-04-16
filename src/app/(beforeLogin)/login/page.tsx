@@ -1,8 +1,10 @@
-import { redirect } from "next/navigation";
-import React from "react";
+"use client";
 
-const LoginPage = () => {
-  redirect("/i/flow/login");
-};
+import { useRouter } from "next/navigation";
+import Main from "../_component/main/Main";
 
-export default LoginPage;
+export default function LoginPage() {
+  const router = useRouter();
+  router.replace("/i/flow/login");
+  return <Main />;
+}
