@@ -17,6 +17,7 @@ const Button = ({
   type = "button",
   padding = "none",
   className = "",
+  ...props
 }: ButtonProps) => {
   const buttonClass = button({
     variant: variant,
@@ -25,7 +26,7 @@ const Button = ({
   });
 
   return (
-    <button type={type} className={`${className} ${buttonClass}`}>
+    <button type={type} className={`${className} ${buttonClass}`} {...props}>
       {children}
     </button>
   );
