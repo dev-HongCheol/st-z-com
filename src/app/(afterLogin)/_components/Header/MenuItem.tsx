@@ -9,6 +9,7 @@ import {
 } from "./menuList.css";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
+import dynamic from "next/dynamic";
 
 export type MenuItemProps = {
   id: number;
@@ -18,18 +19,22 @@ export type MenuItemProps = {
 };
 
 const MenuItem = ({ id, icon, label, href }: MenuItemProps) => {
-  const loginSegment = useSelectedLayoutSegment();
-  const isActive = href === loginSegment;
-  // console.log("🚀 _ MenuItem _ loginSegment:", loginSegment, isActive);
+  const segment = useSelectedLayoutSegment();
+  const isActive = href === `/${segment}`;
 
-  // const IconComponent = React.lazy(
-  //   () => import(`@/components/icons/${isActive ? icon + "Fill" : icon}`)
-  // );
+  const IconComponent = dynamic(
+    () => import(`@/components/icons/${isActive ? icon + "Fill" : icon}`),
+    {
+      ssr: false,
+    }
+  );
 
   return (
     <li className={menuItemLi}>
       <Link href={href} className={menuItem}>
-        <div className={navIcon}>{/* <IconComponent /> */}</div>
+        <div className={navIcon}>
+          <IconComponent />
+        </div>
         <div className={`${menuItemLabel} ${isActive ? selected : ""}`}>
           {label}
         </div>
