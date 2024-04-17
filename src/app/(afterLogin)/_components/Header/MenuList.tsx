@@ -1,6 +1,7 @@
 import React from "react";
 import MenuItem, { MenuItemProps } from "./MenuItem";
 import Button from "@/components/uis/atoms/Button";
+import { tweetBtn } from "./menuList.css";
 
 const menuItems: MenuItemProps[] = [
   {
@@ -42,7 +43,7 @@ const MenuList = () => {
           />
         ))}
       </ul>
-      <Button>게시하기</Button>
+      <Button className={tweetBtn}>게시하기</Button>
     </nav>
   );
 };

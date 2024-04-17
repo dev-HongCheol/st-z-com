@@ -30,6 +30,7 @@ const formTextarea = style({
   fontSize: "1.4rem",
   resize: "none",
   marginTop: "0.4rem",
+  height: "25px",
 });
 
 const comment = style({

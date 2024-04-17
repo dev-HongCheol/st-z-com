@@ -31,4 +31,10 @@ const selected = style({
   fontWeight: "bold",
 });
 
-export { menuItemLi, menuItem, navIcon, menuItemLabel, selected };
+const tweetBtn = style({
+  width: "90% !important",
+  marginTop: "0.8rem",
+  height: "50px",
+});
+
+export { menuItemLi, menuItem, navIcon, menuItemLabel, selected, tweetBtn };

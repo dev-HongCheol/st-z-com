@@ -10,7 +10,7 @@ export const button = recipe({
     variant: {
       contained: {
         background: "rgb(29, 155, 240)",
-        borderRadius: "1rem",
+        borderRadius: "1.5rem",
         border: "1px solid",
         color: "white",
         borderColor: "rgba(0, 0, 0, 0)",
@@ -26,7 +26,7 @@ export const button = recipe({
         },
       },
       outlined: {
-        borderRadius: "1rem",
+        borderRadius: "1.5rem",
         border: "1px solid",
         background: "rgba(0, 0, 0, 0)",
         borderColor: "rgb(29, 155, 240)",
