@@ -3,12 +3,15 @@ import Image from "next/image";
 
 import React from "react";
 import MenuList from "./MenuList";
-import { header } from "./header.css";
+import { header, logoImage } from "./header.css";
+import Button from "@/components/uis/atoms/Button";
 
 const Header = () => {
   return (
     <header className={header}>
-      <Image src={LogoImage} alt="logo" width={32} height={32} />
+      <Button variant="text" className={logoImage}>
+        <Image src={LogoImage} alt="logo" width={26} height={24} />
+      </Button>
       <MenuList />
     </header>
   );

@@ -1,46 +1,30 @@
-import React, { ReactNode } from "react";
-import { menuItem } from "./menuList.css";
-
-type MenuItemProps = {
-  id: number;
-  icon: ReactNode;
-  label: string;
-  isActive: boolean;
-};
-
-const MenuItem = ({ id, icon, isActive, label }: MenuItemProps) => {
-  return (
-    <li className={menuItem}>
-      <div>icon</div>
-      <div>{label}</div>
-    </li>
-  );
-};
+import React from "react";
+import MenuItem, { MenuItemProps } from "./MenuItem";
 
 const menuItems: MenuItemProps[] = [
   {
     id: 1,
-    icon: "",
+    icon: "Home",
     label: "홈",
-    isActive: false,
+    href: "/home",
   },
   {
     id: 2,
-    icon: "",
+    icon: "Explore",
     label: "탐색기",
-    isActive: false,
+    href: "/explore",
   },
   {
     id: 3,
-    icon: "",
+    icon: "Message",
     label: "쪽지",
-    isActive: false,
+    href: "/message",
   },
   {
     id: 4,
-    icon: "",
+    icon: "Profile",
     label: "프로필",
-    isActive: false,
+    href: "/profile",
   },
 ];
 const MenuList = () => {
@@ -52,8 +36,8 @@ const MenuList = () => {
             key={menuItem.id}
             id={menuItem.id}
             icon={menuItem.icon}
-            isActive={menuItem.isActive}
             label={menuItem.label}
+            href={menuItem.href}
           />
         ))}
       </ul>
