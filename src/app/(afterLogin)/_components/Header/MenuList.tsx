@@ -1,5 +1,6 @@
 import React from "react";
 import MenuItem, { MenuItemProps } from "./MenuItem";
+import Button from "@/components/uis/atoms/Button";
 
 const menuItems: MenuItemProps[] = [
   {
@@ -41,6 +42,7 @@ const MenuList = () => {
           />
         ))}
       </ul>
+      <Button>게시하기</Button>
     </nav>
   );
 };

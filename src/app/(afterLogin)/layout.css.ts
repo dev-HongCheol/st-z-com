@@ -9,7 +9,6 @@ const layoutWrapper = style({
 
 const mainWrapper = style({
   width: "calc(100% - 300px)",
-  background: "red",
 });
 
 const headerWrapper = style({

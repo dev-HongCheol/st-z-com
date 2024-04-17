@@ -13,10 +13,7 @@ const layout = ({ children }: LayoutProps) => {
           <Header />
         </div>
       </div>
-      <div className={mainWrapper}>
-        <div>컨텐츠</div>
-      </div>
-      {/* {children} */}
+      <div className={mainWrapper}>{children}</div>
     </div>
   );
 };
