@@ -1,7 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
 const wrapper = style({
-  height: "598px",
+  maxHeight: "598px",
   borderBottom: "1px solid #e3e3e3",
   borderLeft: "1px solid #e3e3e3",
   borderRight: "1px solid #e3e3e3",
@@ -24,6 +24,10 @@ const tweetContent = style({
 const tweetUserWrapper = style({
   display: "flex",
   justifyContent: "space-between",
+});
+
+const tweetInfo = style({
+  display: "flex",
 });
 
 const userName = style({
@@ -50,6 +54,12 @@ const buttonWrapper = style({
 });
 const button = style({
   flex: 1,
+  width: 40,
+  height: 40,
+});
+
+const widthAuto = style({
+  width: "auto !important",
 });
 
 const vx = {
@@ -57,11 +67,13 @@ const vx = {
   avatar,
   tweetContent,
   tweetUserWrapper,
+  tweetInfo,
   userName,
   userId,
   writeTime,
   dot,
   buttonWrapper,
   button,
+  widthAuto,
 };
 export default vx;
