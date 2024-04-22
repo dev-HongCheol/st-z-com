@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useMemo, useRef, useState } from "react";
 import {
   avatar,
   avatarImage,
@@ -27,6 +27,11 @@ const me = {
 
 const WriteForm = () => {
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isSubmitDisabled = useMemo(
+    () => textareaRef.current?.value.length === 0,
+    textareaRef.current?.value
+  );
 
   const handleFocusTextarea = () => {
     setIsClickedTextarea(true);
@@ -34,6 +39,12 @@ const WriteForm = () => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     console.log("handleSubmit");
+  };
+
+  const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log("🚀  file: WriteForm.tsx:41  onChangeTextarea  event_", event);
+
+    return;
   };
 
   return (
@@ -52,6 +63,8 @@ const WriteForm = () => {
           className={formTextarea}
           placeholder="무슨 일이 있어나고 있나요?"
           onFocus={handleFocusTextarea}
+          ref={textareaRef}
+          onChange={onChangeTextarea}
         />
         {isClickedTextarea && (
           <Link href={"#"} className={comment}>
@@ -69,7 +82,11 @@ const WriteForm = () => {
             </Button>
           </div>
           <div>
-            <Button className={submitButton} type="submit">
+            <Button
+              className={submitButton}
+              type="submit"
+              disabled={isSubmitDisabled}
+            >
               게시하기
             </Button>
           </div>
