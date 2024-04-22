@@ -19,6 +19,7 @@ const homeTopTab = style({
   justifyContent: "space-between",
   height: "100%",
   alignItems: "center",
+  cursor: "pointer",
 });
 
 const activeTabText = style({
