@@ -1,8 +1,13 @@
 import React from "react";
 import { wrapper } from "./tweet.css";
+import Tweet from "./Tweet";
 
 const TweetList = () => {
-  return <div className={wrapper}>TweetList</div>;
+  return (
+    <div>
+      <Tweet />
+    </div>
+  );
 };
 
 export default TweetList;
