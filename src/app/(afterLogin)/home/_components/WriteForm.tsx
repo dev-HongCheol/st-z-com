@@ -39,7 +39,13 @@ const WriteForm = () => {
   return (
     <div className={writeFormWrapper}>
       <div className={avatar}>
-        <Image src={me.image} alt="profileImage" fill className={avatarImage} />
+        <Image
+          src={me.image}
+          alt="profileImage"
+          className={avatarImage}
+          width={40}
+          height={40}
+        />
       </div>
       <form className={writeForm} onSubmit={handleSubmit}>
         <textarea

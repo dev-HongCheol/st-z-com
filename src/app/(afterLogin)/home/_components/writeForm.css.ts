@@ -13,10 +13,12 @@ const avatar = style({
   height: "40px",
   position: "relative",
   marginRight: "1.1rem",
+  zIndex: -1,
 });
 
 const avatarImage = style({
   borderRadius: "100%",
+  width: "40px",
 });
 
 const writeForm = style({

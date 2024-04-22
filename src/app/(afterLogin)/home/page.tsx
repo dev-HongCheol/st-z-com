@@ -3,7 +3,7 @@ import React from "react";
 import { main, mainSection, sideSection } from "./homepage.css";
 import HomeTopTab from "./_components/HomeTopTab";
 import WriteForm from "./_components/WriteForm";
-import Tweet from "./_components/Tweet";
+import TweetList from "./_components/TweetList";
 
 const HomePage = () => {
   return (
@@ -12,7 +12,7 @@ const HomePage = () => {
       <div className={mainSection}>
         <HomeTopTab />
         <WriteForm />
-        <Tweet />
+        <TweetList />
       </div>
       <div className={sideSection}>sideSection</div>
     </div>
