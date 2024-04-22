@@ -24,7 +24,7 @@ const Tweet = () => {
           height={40}
         />
       </div>
-      <div>
+      <div className={vx.tweetContent}>
         <div className={vx.tweetUserWrapper}>
           <div className={vx.userName}>{tweetInfo.userName}</div>
           <div className={vx.userId}>
@@ -34,6 +34,17 @@ const Tweet = () => {
           <div className={vx.userId}>
             {dayjs(tweetInfo.writeTime).fromNow()}
           </div>
+        </div>
+        <div>
+          트윗 내용입니다 뭐든 써보세요.
+          <br />
+          sfasf
+        </div>
+        <div className={vx.buttonWrapper}>
+          <div className={vx.button}>댓글</div>
+          <div className={vx.button}>트륏</div>
+          <div className={vx.button}>하트</div>
+          <div className={vx.button}>조회수</div>
         </div>
       </div>
     </div>

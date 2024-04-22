@@ -17,6 +17,10 @@ const avatar = style({
   zIndex: -1,
 });
 
+const tweetContent = style({
+  flex: 1,
+});
+
 const tweetUserWrapper = style({
   display: "flex",
   justifyContent: "space-between",
@@ -41,13 +45,23 @@ const dot = style({
   textOverflow: "unset",
 });
 
+const buttonWrapper = style({
+  display: "flex",
+});
+const button = style({
+  flex: 1,
+});
+
 const vx = {
   wrapper,
   avatar,
+  tweetContent,
   tweetUserWrapper,
   userName,
   userId,
   writeTime,
   dot,
+  buttonWrapper,
+  button,
 };
 export default vx;
