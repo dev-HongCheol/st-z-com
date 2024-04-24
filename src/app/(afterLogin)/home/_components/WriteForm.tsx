@@ -41,9 +41,16 @@ const WriteForm = () => {
     console.log("handleSubmit");
   };
 
+  function adjustTextareaHeight() {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+
+    textarea.style.height = "auto"; // Reset height to auto to recalculate
+    textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
+  }
+
   const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     console.log("🚀  file: WriteForm.tsx:41  onChangeTextarea  event_", event);
-
     return;
   };
 
@@ -65,6 +72,7 @@ const WriteForm = () => {
           onFocus={handleFocusTextarea}
           ref={textareaRef}
           onChange={onChangeTextarea}
+          onInput={adjustTextareaHeight}
         />
         {isClickedTextarea && (
           <Link href={"#"} className={comment}>

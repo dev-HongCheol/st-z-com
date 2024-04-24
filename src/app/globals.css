@@ -27,3 +27,7 @@ a:active {
   text-decoration: none;
   color: var(--text-color);
 }
+
+body {
+  font-size: 14px;
+}
