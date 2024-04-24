@@ -1,6 +1,6 @@
 import React from "react";
 
-import { main, mainSection, sideSection } from "./homepage.css";
+import ve from "./homepage.css";
 import HomeTopTab from "./_components/HomeTopTab";
 import WriteForm from "./_components/WriteForm";
 import TweetList from "./_components/TweetList";
@@ -12,18 +12,20 @@ import TrendList from "./_components/TrendList";
 const HomePage = () => {
   return (
     <HomeContextProvider>
-      <div className={main}>
+      <div className={ve.main}>
         {/* main content */}
-        <div className={mainSection}>
+        <main className={ve.mainSection}>
           <HomeTopTab />
           <WriteForm />
           <TweetList />
-        </div>
-        <div className={sideSection}>
+        </main>
+        <aside className={ve.aside}>
           <SearchInput />
-          <TrendList />
-          <RecommendFollow />
-        </div>
+          <section className={ve.sideSection}>
+            <TrendList />
+            <RecommendFollow />
+          </section>
+        </aside>
       </div>
     </HomeContextProvider>
   );

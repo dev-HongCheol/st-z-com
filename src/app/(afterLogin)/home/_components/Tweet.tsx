@@ -55,8 +55,7 @@ const Tweet = () => {
           <br />
           출연진들의 찐 반응을..
           <br />
-          미스터리 어드벤처 <br />
-          <br />
+          미스터리 어드벤처
         </div>
         <div className={vx.buttonWrapper}>
           <div className={vx.button}>
