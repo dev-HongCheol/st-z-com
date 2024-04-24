@@ -10,6 +10,5 @@ const mainSection = style({
 });
 const sideSection = style({
   width: "380px",
-  background: "orange",
 });
 export { main, mainSection, sideSection };
