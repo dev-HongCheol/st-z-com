@@ -6,8 +6,8 @@ import WriteForm from "./_components/WriteForm";
 import TweetList from "./_components/TweetList";
 import HomeContextProvider from "./_components/Provider";
 import SearchInput from "./_components/SearchInput";
-import RecommendFollow from "./_components/RecommendFollow";
 import TrendList from "./_components/TrendList";
+import RecommendFollowList from "./_components/RecommendFollowList";
 
 const HomePage = () => {
   return (
@@ -23,7 +23,7 @@ const HomePage = () => {
           <SearchInput />
           <section className={ve.sideSection}>
             <TrendList />
-            <RecommendFollow />
+            <RecommendFollowList />
           </section>
         </aside>
       </div>

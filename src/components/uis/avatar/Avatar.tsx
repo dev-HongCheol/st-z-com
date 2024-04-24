@@ -2,7 +2,7 @@ import React from "react";
 import ve from "./avatar.css";
 import Image from "next/image";
 
-type AvatarProps = {
+export type AvatarProps = {
   src: string;
   name: string;
   id: string;
@@ -18,11 +18,13 @@ const Avatar = ({ src, name, id, rounded = false }: AvatarProps) => {
           alt="profileImage"
           fill
           className={rounded ? ve.rounded : ""}
+          sizes="(max-width: 768px) 40px, 40px"
+          quality={100}
         />
       </div>
       <div className={ve.text}>
         <div className={ve.name}>{name}</div>
-        <div>@{id}</div>
+        <div className={ve.id}>@{id}</div>
       </div>
     </div>
   );

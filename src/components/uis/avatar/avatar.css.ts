@@ -8,8 +8,8 @@ const wrapper = style({
 
 const ImgWrapper = style({
   position: "relative",
-  width: 42,
-  height: 42,
+  width: 40,
+  height: 40,
 });
 
 const rounded = style({
@@ -24,12 +24,17 @@ const name = style({
   fontWeight: "bold",
 });
 
+const id = style({
+  color: "gray",
+});
+
 const ve = {
   wrapper,
   ImgWrapper,
   rounded,
   text,
   name,
+  id,
 };
 
 export default ve;
