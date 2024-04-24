@@ -30,7 +30,7 @@ const WriteForm = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const isSubmitDisabled = useMemo(
     () => textareaRef.current?.value.length === 0,
-    textareaRef.current?.value
+    [textareaRef]
   );
 
   const handleFocusTextarea = () => {
