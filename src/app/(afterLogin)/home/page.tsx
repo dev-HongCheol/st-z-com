@@ -6,8 +6,8 @@ import WriteForm from "./_components/WriteForm";
 import TweetList from "./_components/TweetList";
 import HomeContextProvider from "./_components/Provider";
 import SearchInput from "./_components/SearchInput";
-import Trend from "./_components/Trend";
 import RecommendFollow from "./_components/RecommendFollow";
+import TrendList from "./_components/TrendList";
 
 const HomePage = () => {
   return (
@@ -21,7 +21,7 @@ const HomePage = () => {
         </div>
         <div className={sideSection}>
           <SearchInput />
-          <Trend />
+          <TrendList />
           <RecommendFollow />
         </div>
       </div>

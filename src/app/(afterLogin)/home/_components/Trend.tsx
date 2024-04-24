@@ -1,7 +1,7 @@
 import React from "react";
 
 const Trend = () => {
-  return <div>Recommended</div>;
+  return <div></div>;
 };
 
 export default Trend;
