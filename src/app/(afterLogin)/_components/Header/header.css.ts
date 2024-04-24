@@ -27,37 +27,4 @@ const profileBtn = style({
   },
 });
 
-const profileWrapper = style({
-  display: "flex",
-  alignItems: "center",
-  gap: "10px",
-});
-
-const profileImgWrapper = style({
-  position: "relative",
-  width: 42,
-  height: 42,
-});
-const profileImg = style({
-  borderRadius: "100%",
-});
-
-const profileText = style({
-  textAlign: "left",
-});
-
-const profileName = style({
-  fontWeight: "bold",
-});
-
-export {
-  header,
-  navWrapper,
-  logoImage,
-  profileBtn,
-  profileWrapper,
-  profileImgWrapper,
-  profileImg,
-  profileText,
-  profileName,
-};
+export { header, navWrapper, logoImage, profileBtn };

@@ -3,23 +3,14 @@ import Image from "next/image";
 
 import React from "react";
 import MenuList from "./MenuList";
-import {
-  header,
-  logoImage,
-  navWrapper,
-  profileName,
-  profileBtn,
-  profileImg,
-  profileImgWrapper,
-  profileText,
-  profileWrapper,
-} from "./header.css";
+import { header, logoImage, navWrapper, profileBtn } from "./header.css";
 import Button from "@/components/uis/atoms/Button";
+import Avatar from "@/components/uis/avatar/Avatar";
 
 //FIXME: testCode
 const me = {
   name: "devhong",
-  id: "@devhong1234",
+  id: "devhong1234",
   image: "/default_profile_normal.png",
 };
 
@@ -34,20 +25,7 @@ const Header = () => {
       </div>
       <div>
         <Button className={profileBtn} variant="text">
-          <div className={profileWrapper}>
-            <div className={profileImgWrapper}>
-              <Image
-                className={profileImg}
-                src={me.image}
-                alt="profileImage"
-                fill
-              />
-            </div>
-            <div className={profileText}>
-              <div className={profileName}>{me.name}</div>
-              <div>{me.id}</div>
-            </div>
-          </div>
+          <Avatar src={me.image} id={me.id} name={me.name} rounded />
         </Button>
       </div>
     </header>
