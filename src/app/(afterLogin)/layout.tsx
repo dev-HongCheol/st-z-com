@@ -1,9 +1,7 @@
 import React, { ReactNode } from "react";
 import Header from "./_component/header/Header";
 import ve from "./layout.css";
-import SearchInput from "./_component/SearchInput";
-import TrendList from "./_component/TrendList";
-import RecommendFollowList from "./_component/RecommendFollowList";
+import Aside from "./_component/Aside";
 
 type LayoutProps = {
   children: ReactNode;
@@ -19,14 +17,8 @@ const layout = ({ children, modal }: LayoutProps) => {
           </div>
         </div>
         <div className={ve.mainWrapper}>
-          {children}
-          <aside className={ve.aside}>
-            <SearchInput />
-            <section className={ve.sideSection}>
-              <TrendList />
-              <RecommendFollowList />
-            </section>
-          </aside>
+          <main className={ve.main}>{children}</main>
+          <Aside />
         </div>
         {modal}
       </div>

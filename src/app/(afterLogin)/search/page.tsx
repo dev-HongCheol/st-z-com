@@ -1,7 +1,7 @@
 import React from "react";
 import SearchInput from "../_component/SearchInput";
 
-const ExplorePage = () => {
+const page = () => {
   return (
     <div>
       <SearchInput />
@@ -9,4 +9,4 @@ const ExplorePage = () => {
   );
 };
 
-export default ExplorePage;
+export default page;

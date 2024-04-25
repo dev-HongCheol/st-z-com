@@ -9,12 +9,9 @@ import HomeContextProvider from "./_components/Provider";
 const HomePage = () => {
   return (
     <HomeContextProvider>
-      {/* main content */}
-      <main className={ve.mainSection}>
-        <HomeTopTab />
-        <WriteForm />
-        <TweetList />
-      </main>
+      <HomeTopTab />
+      <WriteForm />
+      <TweetList />
     </HomeContextProvider>
   );
 };

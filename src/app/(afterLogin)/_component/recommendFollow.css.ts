@@ -9,9 +9,10 @@ const wrapper = style({
 
 const button = style({
   width: "auto !important",
-  //   background: "white !important",
+  background: "black !important",
   border: "1px solid black !important",
   padding: "0.4rem 0.8rem !important",
+  color: "white",
 });
 
 const ve = { wrapper, button };

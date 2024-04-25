@@ -14,7 +14,7 @@ const menuItems: MenuItemProps[] = [
   {
     id: 2,
     icon: "Explore",
-    label: "탐색기",
+    label: "탐색하기",
     href: "/explore",
   },
   {

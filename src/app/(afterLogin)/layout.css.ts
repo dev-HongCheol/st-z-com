@@ -18,14 +18,9 @@ const headerWrapper = style({
   height: "100dvh",
 });
 
-const aside = style({
-  width: "380px",
+const main = style({
+  width: "600px",
 });
 
-const sideSection = style({
-  position: "sticky",
-  top: 0,
-});
-
-const ve = { layoutWrapper, mainWrapper, headerWrapper, aside, sideSection };
+const ve = { layoutWrapper, mainWrapper, headerWrapper, main };
 export default ve;
