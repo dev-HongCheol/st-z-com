@@ -9,10 +9,23 @@ const layoutWrapper = style({
 
 const mainWrapper = style({
   width: "calc(100% - 300px)",
+  display: "flex",
+  justifyContent: "space-between",
 });
 
 const headerWrapper = style({
   width: "300px",
   height: "100dvh",
 });
-export { layoutWrapper, mainWrapper, headerWrapper };
+
+const aside = style({
+  width: "380px",
+});
+
+const sideSection = style({
+  position: "sticky",
+  top: 0,
+});
+
+const ve = { layoutWrapper, mainWrapper, headerWrapper, aside, sideSection };
+export default ve;

@@ -8,14 +8,7 @@ const main = style({
 const mainSection = style({
   width: "600px",
 });
-const aside = style({
-  width: "380px",
-});
 
-const sideSection = style({
-  position: "sticky",
-  top: 0,
-});
-const ve = { main, mainSection, aside, sideSection };
+const ve = { main, mainSection };
 
 export default ve;

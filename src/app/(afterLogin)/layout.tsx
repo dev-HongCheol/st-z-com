@@ -1,6 +1,9 @@
 import React, { ReactNode } from "react";
 import Header from "./_component/header/Header";
-import { headerWrapper, layoutWrapper, mainWrapper } from "./layout.css";
+import ve from "./layout.css";
+import SearchInput from "./_component/SearchInput";
+import TrendList from "./_component/TrendList";
+import RecommendFollowList from "./_component/RecommendFollowList";
 
 type LayoutProps = {
   children: ReactNode;
@@ -9,13 +12,22 @@ type LayoutProps = {
 const layout = ({ children, modal }: LayoutProps) => {
   return (
     <>
-      <div className={layoutWrapper}>
-        <div className={headerWrapper}>
+      <div className={ve.layoutWrapper}>
+        <div className={ve.headerWrapper}>
           <div>
             <Header />
           </div>
         </div>
-        <div className={mainWrapper}>{children}</div>
+        <div className={ve.mainWrapper}>
+          {children}
+          <aside className={ve.aside}>
+            <SearchInput />
+            <section className={ve.sideSection}>
+              <TrendList />
+              <RecommendFollowList />
+            </section>
+          </aside>
+        </div>
         {modal}
       </div>
     </>
