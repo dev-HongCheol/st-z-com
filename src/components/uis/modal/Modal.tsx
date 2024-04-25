@@ -3,12 +3,15 @@ import { modal, modalWrapper } from "./modal.css";
 
 type ModalProps = {
   children: ReactNode;
+  className?: string;
 };
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ children, className = "" }: ModalProps) => {
   return (
     <div className={modal}>
-      <div className={modalWrapper}>{children}</div>
+      <div className={`${modalWrapper} ${className ? className : ""}`}>
+        {children}
+      </div>
     </div>
   );
 };

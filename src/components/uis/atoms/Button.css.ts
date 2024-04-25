@@ -17,6 +17,9 @@ export const button = recipe({
         ":hover": {
           background: "rgba(29, 155, 240, 0.9)",
         },
+        ":disabled": {
+          background: "rgba(29, 155, 240, 0.7)",
+        },
       },
       text: {
         background: "rgba(0, 0, 0, 0)",

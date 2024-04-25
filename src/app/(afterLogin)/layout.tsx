@@ -4,17 +4,21 @@ import { headerWrapper, layoutWrapper, mainWrapper } from "./layout.css";
 
 type LayoutProps = {
   children: ReactNode;
+  modal: ReactNode;
 };
-const layout = ({ children }: LayoutProps) => {
+const layout = ({ children, modal }: LayoutProps) => {
   return (
-    <div className={layoutWrapper}>
-      <div className={headerWrapper}>
-        <div>
-          <Header />
+    <>
+      <div className={layoutWrapper}>
+        <div className={headerWrapper}>
+          <div>
+            <Header />
+          </div>
         </div>
+        <div className={mainWrapper}>{children}</div>
+        {modal}
       </div>
-      <div className={mainWrapper}>{children}</div>
-    </div>
+    </>
   );
 };
 

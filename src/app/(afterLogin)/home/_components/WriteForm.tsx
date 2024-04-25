@@ -28,10 +28,8 @@ const me = {
 const WriteForm = () => {
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const isSubmitDisabled = useMemo(
-    () => textareaRef.current?.value.length === 0,
-    [textareaRef]
-  );
+
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   const mediaInput = useRef<HTMLInputElement>(null);
   const handleUploadMedia = () => {
@@ -55,8 +53,7 @@ const WriteForm = () => {
   }
 
   const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log("🚀  file: WriteForm.tsx:41  onChangeTextarea  event_", event);
-    return;
+    setIsSubmitDisabled(event.target.value.length === 0);
   };
 
   return (
