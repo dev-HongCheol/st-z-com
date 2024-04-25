@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Header from "./_components/Header/Header";
+import Header from "./_component/header/Header";
 import { headerWrapper, layoutWrapper, mainWrapper } from "./layout.css";
 
 type LayoutProps = {
