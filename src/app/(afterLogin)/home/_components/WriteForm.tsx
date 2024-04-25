@@ -33,6 +33,11 @@ const WriteForm = () => {
     [textareaRef]
   );
 
+  const mediaInput = useRef<HTMLInputElement>(null);
+  const handleUploadMedia = () => {
+    mediaInput.current?.click();
+  };
+
   const handleFocusTextarea = () => {
     setIsClickedTextarea(true);
   };
@@ -82,9 +87,22 @@ const WriteForm = () => {
         <hr className={divider} />
         <div className={btns}>
           <div className={uploadContentBtnWrapper}>
-            <Button variant="text" className={contentUploadBtn} title="미디어">
+            <Button
+              variant="text"
+              className={contentUploadBtn}
+              title="미디어"
+              onClick={handleUploadMedia}
+            >
               <MediaUpload />
             </Button>
+            <input
+              type="file"
+              hidden
+              name="media"
+              multiple
+              accept="image/*"
+              ref={mediaInput}
+            />
             <Button variant="text" className={contentUploadBtn} title="GIF">
               <GifUpload />
             </Button>
