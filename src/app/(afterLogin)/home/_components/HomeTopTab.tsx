@@ -1,13 +1,9 @@
 "use client";
 import React, { useContext } from "react";
-import {
-  activeTab,
-  activeTabText,
-  homeTopTab,
-  homeTopTabWrapper,
-} from "./homeTopTab.css";
+
 import { HomeContext, HomeTopTabNames } from "./Provider";
 import Tab, { ITab } from "@/components/uis/tab/Tab";
+import ve from "./homeTopTab.css";
 
 const tabs: ITab[] = [
   {
@@ -26,11 +22,13 @@ const HomeTopTab = () => {
     setTab(tab.label as HomeTopTabNames);
   };
   return (
-    <Tab
-      tabs={tabs}
-      defaultSelectedTab={tabs[0]}
-      handleSelectedTab={onSelectedTab}
-    />
+    <div className={ve.homeTopTabWrapper}>
+      <Tab
+        tabs={tabs}
+        defaultSelectedTab={tabs[0]}
+        handleSelectedTab={onSelectedTab}
+      />
+    </div>
   );
 };
 

@@ -27,7 +27,13 @@ const Tab = ({ defaultSelectedTab, tabs, handleSelectedTab }: TabProps) => {
           onClick={() => onSelectedTab(tab)}
           key={tab.value}
         >
-          <div className={ve.activeTabText}>{tab.label}</div>
+          <div
+            className={`${ve.tabText} ${
+              tab.value === activeTab.value ? ve.activeTabText : ""
+            }`}
+          >
+            {tab.label}
+          </div>
           <div className={tab.value === activeTab.value ? ve.activeTab : ""} />
         </div>
       ))}

@@ -3,7 +3,10 @@ import { style } from "@vanilla-extract/css";
 const wrapper = style({
   color: "gray",
   fontSize: "0.8rem",
-  padding: "12px 0",
+  padding: "12px",
+  ":hover": {
+    background: "rgba(0,0,0,0.02)",
+  },
 });
 
 const header = style({

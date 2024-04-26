@@ -4,11 +4,7 @@ const tabWrapper = style({
   display: "flex",
   height: "53px",
   alignItems: "center",
-  border: "1px solid #e3e3e3",
-  position: "sticky",
-  top: "0px",
-  backdropFilter: "blur(12px)",
-  backgroundColor: "rgba(255, 255, 255, 0.65)",
+  width: "100%",
 });
 
 const tab = style({
@@ -22,8 +18,12 @@ const tab = style({
   cursor: "pointer",
 });
 
-const activeTabText = style({
+const tabText = style({
   marginTop: "15px",
+});
+
+const activeTabText = style({
+  fontWeight: "bold",
 });
 
 const activeTab = style({
@@ -31,6 +31,6 @@ const activeTab = style({
   borderBottom: "3px solid rgb(29, 155, 240)",
 });
 
-const ve = { tabWrapper, tab, activeTabText, activeTab };
+const ve = { tabWrapper, tab, tabText, activeTabText, activeTab };
 
 export default ve;

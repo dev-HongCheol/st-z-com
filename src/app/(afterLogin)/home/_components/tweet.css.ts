@@ -7,6 +7,9 @@ const wrapper = style({
   borderRight: "1px solid #e3e3e3",
   display: "flex",
   padding: "2px 16px",
+  ":hover": {
+    background: "rgba(0,0,0,0.02)",
+  },
 });
 
 const avatar = style({

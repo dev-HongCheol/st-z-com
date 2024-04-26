@@ -4,7 +4,10 @@ const wrapper = style({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "12px 0",
+  padding: "12px",
+  ":hover": {
+    background: "rgba(0,0,0,0.02)",
+  },
 });
 
 const button = style({
