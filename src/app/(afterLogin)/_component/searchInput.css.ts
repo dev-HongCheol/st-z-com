@@ -16,7 +16,7 @@ const inputBlur = style({
   border: "1px solid #f0f0f0",
 });
 const inputFocus = style({
-  background: "none",
+  background: "white",
   border: "1px solid rgb(29, 155, 240)",
 });
 
