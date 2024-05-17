@@ -1,16 +1,12 @@
 import { style } from "@vanilla-extract/css";
-
 const wrapper = style({
-  maxHeight: "598px",
-  borderBottom: "1px solid #e3e3e3",
   borderLeft: "1px solid #e3e3e3",
   borderRight: "1px solid #e3e3e3",
+});
+const contentWrapper = style({
+  maxHeight: "598px",
   display: "flex",
   padding: "2px 16px",
-  ":hover": {
-    background: "rgba(0,0,0,0.02)",
-    cursor: "pointer",
-  },
 });
 
 const avatar = style({
@@ -72,8 +68,24 @@ const widthAuto = style({
   width: "auto !important",
 });
 
-const vx = {
+const followButton = style({
+  width: "auto !important",
+});
+
+const articleHeader = style({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  padding: "1rem",
+});
+
+const createAt = style({
+  margin: "1.2rem 0",
+});
+
+const ve = {
   wrapper,
+  contentWrapper,
   avatar,
   tweetContent,
   tweetUserWrapper,
@@ -85,5 +97,8 @@ const vx = {
   buttonWrapper,
   button,
   widthAuto,
+  followButton,
+  articleHeader,
+  createAt,
 };
-export default vx;
+export default ve;

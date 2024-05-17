@@ -4,6 +4,7 @@ import ve from "./tab.css";
 export interface ITab {
   label: string;
   value: string;
+  onClick?: () => void;
 }
 
 type TabProps = {
@@ -24,7 +25,10 @@ const Tab = ({ defaultSelectedTab, tabs, handleSelectedTab }: TabProps) => {
       {tabs.map((tab) => (
         <div
           className={ve.tab}
-          onClick={() => onSelectedTab(tab)}
+          onClick={() => {
+            onSelectedTab(tab);
+            tab.onClick && tab.onClick();
+          }}
           key={tab.value}
         >
           <div

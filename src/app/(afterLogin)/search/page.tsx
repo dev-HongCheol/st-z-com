@@ -1,12 +1,17 @@
 import React from "react";
 import SearchInput from "../_component/SearchInput";
+import SearchTab from "./_component/SearchTab";
 
-const page = () => {
+interface SearchPageProps {
+  searchParams: { q: string };
+}
+const SearchPage = ({ searchParams }: SearchPageProps) => {
   return (
     <div>
-      <SearchInput />
+      <SearchInput q={searchParams.q} />
+      <SearchTab />
     </div>
   );
 };
 
-export default page;
+export default SearchPage;
