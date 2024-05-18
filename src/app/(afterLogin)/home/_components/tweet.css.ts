@@ -14,8 +14,8 @@ const wrapper = style({
 });
 
 const avatar = style({
-  width: "40px",
-  height: "40px",
+  maxWidth: "40px",
+  maxHeight: "40px",
   position: "relative",
   marginRight: "1.1rem",
   zIndex: -1,
@@ -49,6 +49,17 @@ const userId = style({
   },
 });
 
+const image = style({
+  width: 500,
+  height: 400,
+  position: "relative",
+});
+
+const statusImage = style({
+  width: 200,
+  height: 150,
+});
+
 const writeTime = style({
   color: "gray",
 });
@@ -72,6 +83,10 @@ const widthAuto = style({
   width: "auto !important",
 });
 
+const colorWhite = style({
+  color: "white",
+});
+
 const vx = {
   wrapper,
   avatar,
@@ -80,10 +95,13 @@ const vx = {
   tweetInfo,
   userName,
   userId,
+  image,
+  statusImage,
   writeTime,
   dot,
   buttonWrapper,
   button,
   widthAuto,
+  colorWhite,
 };
 export default vx;

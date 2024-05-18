@@ -1,6 +1,5 @@
 import LogoImage from "@/assets/logo.svg";
 import Image from "next/image";
-
 import React from "react";
 import MenuList from "./MenuList";
 import { header, logoImage, navWrapper, profileBtn } from "./header.css";

@@ -4,7 +4,6 @@ const wrapper = style({
   borderRight: "1px solid #e3e3e3",
 });
 const contentWrapper = style({
-  maxHeight: "598px",
   display: "flex",
   padding: "2px 16px",
 });

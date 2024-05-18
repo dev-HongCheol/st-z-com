@@ -9,6 +9,8 @@ import ReTweet from "@/components/icons/ReTweet";
 import Heart from "@/components/icons/Heart";
 import Views from "@/components/icons/Views";
 import Avatar from "@/components/uis/avatar/Avatar";
+import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
+import Tweet from "@/app/(afterLogin)/home/_components/Tweet";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
@@ -21,7 +23,11 @@ const tweetInfo = {
   writeTime: 1713762611302,
 };
 
-const StatusTweet = () => {
+interface StatusTweetProps {
+  isPhoto?: boolean;
+}
+
+const StatusTweet = ({ isPhoto }: StatusTweetProps) => {
   return (
     <div className={ve.wrapper}>
       <div className={ve.articleHeader}>
@@ -53,28 +59,7 @@ const StatusTweet = () => {
             {dayjs(tweetInfo.writeTime).format("A h:mm · YYYY년 M월 D일")}
           </div>
 
-          <div className={ve.buttonWrapper}>
-            <div className={ve.button}>
-              <Button variant="text" className={ve.widthAuto}>
-                <Comment />
-              </Button>
-            </div>
-            <div className={ve.button}>
-              <Button variant="text" className={ve.widthAuto}>
-                <ReTweet />
-              </Button>
-            </div>
-            <div className={ve.button}>
-              <Button variant="text" className={ve.widthAuto}>
-                <Heart />
-              </Button>
-            </div>
-            <div className={ve.button}>
-              <Button variant="text" className={ve.widthAuto}>
-                <Views />
-              </Button>
-            </div>
-          </div>
+          <ActionButtons isWhite />
         </div>
       </div>
     </div>

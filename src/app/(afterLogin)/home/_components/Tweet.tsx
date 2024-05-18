@@ -5,98 +5,75 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import ko from "dayjs/locale/ko";
-import Comment from "@/components/icons/Comment";
-import Button from "@/components/uis/atoms/Button";
-import ReTweet from "@/components/icons/ReTweet";
-import Heart from "@/components/icons/Heart";
-import Views from "@/components/icons/Views";
 import TweetWrapper, { Post } from "./TweetWrapper";
+import { faker } from "@faker-js/faker";
+import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
+import { style } from "@vanilla-extract/css";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
 
-// FIXME:
-const tweetInfo = {
-  userName: "TVING티빙",
-  id: "tvingdotcom",
-  writeTime: 1713762611302,
-};
+interface TweetProps {
+  isPhoto: boolean;
+}
 
-const post: Post = {
-  postId: 1,
-  User: {
-    id: "devhong4124",
-    nickname: "devhong",
-    image: "http://devadf",
-  },
-  createAt: new Date(),
-  Images: ["sdfsdf"],
-  content: "11",
-};
+const Tweet = ({ isPhoto }: TweetProps) => {
+  const post: Post = {
+    postId: 1,
+    User: {
+      id: "tving124",
+      nickname: "TVING티빙",
+      image: "/iiLLo4_n_normal.jpg",
+    },
+    createAt: new Date(),
+    Images: [],
+    content: faker.lorem.text(),
+  };
 
-const Tweet = () => {
+  if (Math.random() > 0.5) {
+    post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() });
+  }
   return (
     <TweetWrapper post={post}>
-      <div className={vx.wrapper}>
+      <div className={`${vx.wrapper} ${isPhoto && vx.colorWhite}`}>
         <div className={vx.avatar}>
-          <Image
-            src={"/iiLLo4_n_normal.jpg"}
-            alt="profile"
-            width={40}
-            height={40}
-          />
+          <Image src={post.User.image} alt="profile" width={40} height={40} />
         </div>
         <div className={vx.tweetContent}>
           <div className={vx.tweetUserWrapper}>
             <div className={vx.tweetInfo}>
               <div className={vx.userName}>
-                <Link href={`/${tweetInfo.id}`}>{tweetInfo.userName}</Link>
+                <Link href={`/${post.User.id}`}>{post.User.nickname}</Link>
               </div>
               <div className={vx.userId}>
-                <Link href={`/${tweetInfo.id}`}>@{tweetInfo.id}</Link>
+                <Link href={`/${post.User.id}`}>@{post.User.id}</Link>
               </div>
 
               <span className={vx.dot}>·</span>
-              <div className={vx.userId}>
-                {dayjs(tweetInfo.writeTime).fromNow()}
-              </div>
+              <div className={vx.userId}>{dayjs(post.createAt).fromNow()}</div>
             </div>
           </div>
           {/* content */}
+          <div>{post.content}</div>
           <div>
-            여고추리반3
-            <br />
-            <br />
-            평점 114214/141
-            <br />
-            <br />
-            출연진들의 찐 반응을..
-            <br />
-            미스터리 어드벤처
+            {post.Images && post.Images.length > 0 && (
+              <Link
+                href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
+                scroll={false}
+              >
+                <div className={`${vx.image} ${isPhoto && vx.statusImage}`}>
+                  <Image
+                    src={post.Images[0]?.link}
+                    alt="image"
+                    fill
+                    sizes="600px"
+                  />
+                </div>
+              </Link>
+            )}
           </div>
 
-          <div className={vx.buttonWrapper}>
-            <div className={vx.button}>
-              <Button variant="text" className={vx.widthAuto}>
-                <Comment />
-              </Button>
-            </div>
-            <div className={vx.button}>
-              <Button variant="text" className={vx.widthAuto}>
-                <ReTweet />
-              </Button>
-            </div>
-            <div className={vx.button}>
-              <Button variant="text" className={vx.widthAuto}>
-                <Heart />
-              </Button>
-            </div>
-            <div className={vx.button}>
-              <Button variant="text" className={vx.widthAuto}>
-                <Views />
-              </Button>
-            </div>
-          </div>
+          <ActionButtons isWhite={isPhoto} />
         </div>
       </div>
     </TweetWrapper>

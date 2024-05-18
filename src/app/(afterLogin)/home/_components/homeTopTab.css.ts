@@ -7,6 +7,7 @@ const homeTopTabWrapper = style({
   backdropFilter: "blur(12px)",
   backgroundColor: "rgba(255, 255, 255, 0.65)",
   width: "100%",
+  zIndex: 10,
 });
 
 const ve = { homeTopTabWrapper };

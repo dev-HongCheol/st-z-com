@@ -14,7 +14,11 @@ const me = {
   image: "/default_profile_normal.png",
 };
 
-const CommentForm = () => {
+interface CommentFormProps {
+  isPhoto?: boolean;
+}
+
+const CommentForm = ({ isPhoto }: CommentFormProps) => {
   const pathname = (usePathname() || "").split("/");
   const postUserId = pathname[1];
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
@@ -62,7 +66,7 @@ const CommentForm = () => {
         </div>
         <form className={ve.writeForm} onSubmit={handleSubmit}>
           <textarea
-            className={ve.formTextarea}
+            className={`${ve.formTextarea} ${isPhoto && ve.statusFormTextarea}`}
             placeholder="답글 게시하기"
             onFocus={handleFocusTextarea}
             ref={textareaRef}

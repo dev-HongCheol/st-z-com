@@ -26,7 +26,9 @@ const Login = () => {
     console.log("1111", textRef.current?.value, passwordRef.current?.value);
   };
 
-  const onClose = () => router.back();
+  const onClose = () => {
+    router.back();
+  };
 
   return (
     <Modal>

@@ -34,6 +34,11 @@ const formTextarea = style({
   height: "25px",
 });
 
+const statusFormTextarea = style({
+  background: "inherit",
+  color: "white",
+});
+
 const comment = style({
   color: "rgb(29, 155, 240) !important",
 });
@@ -67,6 +72,7 @@ const ve = {
   avatar,
   avatarImage,
   writeForm,
+  statusFormTextarea,
   formTextarea,
   comment,
   btns,
