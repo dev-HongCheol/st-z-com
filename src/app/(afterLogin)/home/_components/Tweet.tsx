@@ -14,7 +14,7 @@ dayjs.extend(relativeTime);
 dayjs.locale(ko);
 
 interface TweetProps {
-  isPhoto: boolean;
+  isPhoto?: boolean;
 }
 
 const Tweet = ({ isPhoto }: TweetProps) => {
