@@ -9,6 +9,7 @@ interface PhotoPageProps {
   };
 }
 const PhotoPage = ({ params }: PhotoPageProps) => {
+  console.log("PhotoPage");
   return (
     <>
       <PhotoModal />

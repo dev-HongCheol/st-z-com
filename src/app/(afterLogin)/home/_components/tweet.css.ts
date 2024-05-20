@@ -49,9 +49,43 @@ const userId = style({
   },
 });
 
-const image = style({
+const imageWrapper = style({
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  rowGap: "0.2rem",
+});
+
+const image1 = style({
   width: 500,
   height: 400,
+  position: "relative",
+});
+
+const image2 = style({
+  width: 250,
+  height: 260,
+  position: "relative",
+});
+
+const image3 = style({
+  width: 250,
+  height: 150,
+  position: "relative",
+});
+
+const image3Grid = style({
+  gridRow: "1 / span 2",
+});
+
+const image3First = style({
+  position: "relative",
+  width: 250,
+  height: 300,
+});
+
+const image4 = style({
+  width: 250,
+  height: 150,
   position: "relative",
 });
 
@@ -87,7 +121,7 @@ const colorWhite = style({
   color: "white",
 });
 
-const vx = {
+const ve = {
   wrapper,
   avatar,
   tweetContent,
@@ -95,7 +129,13 @@ const vx = {
   tweetInfo,
   userName,
   userId,
-  image,
+  imageWrapper,
+  image1,
+  image2,
+  image3,
+  image3Grid,
+  image3First,
+  image4,
   statusImage,
   writeTime,
   dot,
@@ -104,4 +144,4 @@ const vx = {
   widthAuto,
   colorWhite,
 };
-export default vx;
+export default ve;

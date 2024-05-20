@@ -2,6 +2,11 @@
 import { useRouter } from "next/navigation";
 import React, { ReactNode } from "react";
 
+export interface Image {
+  imageId: number;
+  link: string;
+}
+
 export interface Post {
   content: string;
   postId: number;
@@ -11,7 +16,7 @@ export interface Post {
     image: string;
   };
   createAt: Date;
-  Images: any[];
+  Images: Image[];
 }
 
 interface TweetWrapperProps {

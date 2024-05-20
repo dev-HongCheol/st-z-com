@@ -1,3 +1,5 @@
+//FIXME:
+
 "use client";
 
 import React, { useEffect } from "react";
@@ -51,6 +53,7 @@ const PhotoModal = () => {
                 width={500}
                 height={400}
                 priority
+                sizes="500px"
               />
             )}
           </div>
@@ -60,7 +63,7 @@ const PhotoModal = () => {
         </div>
         {/* tweet */}
         <div className={ve.tweetWrapper}>
-          <StatusTweet />
+          <StatusTweet isWhite />
           <CommentForm isPhoto />
           <div>
             <Tweet isPhoto />

@@ -1,5 +1,5 @@
 import React from "react";
-import vx from "./tweet.css";
+import ve from "./tweet.css";
 import Image from "next/image";
 import Link from "next/link";
 import dayjs from "dayjs";
@@ -8,7 +8,6 @@ import ko from "dayjs/locale/ko";
 import TweetWrapper, { Post } from "./TweetWrapper";
 import { faker } from "@faker-js/faker";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
-import { style } from "@vanilla-extract/css";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
@@ -30,47 +29,78 @@ const Tweet = ({ isPhoto }: TweetProps) => {
     content: faker.lorem.text(),
   };
 
-  if (Math.random() > 0.5) {
-    post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() });
+  const imageLength = Math.floor(Math.random() * 10);
+
+  if (imageLength < 5) {
+    for (let imageIndex = 0; imageIndex < imageLength; imageIndex++) {
+      post.Images.push({
+        imageId: imageIndex,
+        link: faker.image.urlLoremFlickr(),
+      });
+    }
   }
+
+  const getImageCss = (imageLength: number, index: number) => {
+    switch (imageLength) {
+      case 1: {
+        return ve.image1;
+      }
+      case 2: {
+        return ve.image2;
+      }
+      case 3: {
+        if (index == 0) return ve.image3First;
+        else return ve.image3;
+      }
+      case 4: {
+        return ve.image4;
+      }
+    }
+  };
+
+  const get3GridImage = (imageLength: number, index: number) => {
+    if (imageLength == 3 && index == 0) return ve.image3Grid;
+    else return "";
+  };
   return (
     <TweetWrapper post={post}>
-      <div className={`${vx.wrapper} ${isPhoto && vx.colorWhite}`}>
-        <div className={vx.avatar}>
+      <div className={`${ve.wrapper} ${isPhoto && ve.colorWhite}`}>
+        <div className={ve.avatar}>
           <Image src={post.User.image} alt="profile" width={40} height={40} />
         </div>
-        <div className={vx.tweetContent}>
-          <div className={vx.tweetUserWrapper}>
-            <div className={vx.tweetInfo}>
-              <div className={vx.userName}>
+        <div className={ve.tweetContent}>
+          <div className={ve.tweetUserWrapper}>
+            <div className={ve.tweetInfo}>
+              <div className={ve.userName}>
                 <Link href={`/${post.User.id}`}>{post.User.nickname}</Link>
               </div>
-              <div className={vx.userId}>
+              <div className={ve.userId}>
                 <Link href={`/${post.User.id}`}>@{post.User.id}</Link>
               </div>
 
-              <span className={vx.dot}>·</span>
-              <div className={vx.userId}>{dayjs(post.createAt).fromNow()}</div>
+              <span className={ve.dot}>·</span>
+              <div className={ve.userId}>{dayjs(post.createAt).fromNow()}</div>
             </div>
           </div>
           {/* content */}
           <div>{post.content}</div>
-          <div>
-            {post.Images && post.Images.length > 0 && (
+          <div className={ve.imageWrapper}>
+            {post.Images.map((image, index) => (
               <Link
-                href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
+                key={image.imageId}
+                href={`/${post.User.id}/status/${post.postId}/photo/${image.imageId}`}
                 scroll={false}
+                className={get3GridImage(post.Images.length, index)}
               >
-                <div className={`${vx.image} ${isPhoto && vx.statusImage}`}>
-                  <Image
-                    src={post.Images[0]?.link}
-                    alt="image"
-                    fill
-                    sizes="600px"
-                  />
+                <div
+                  className={`${getImageCss(post.Images.length, index)} ${
+                    isPhoto ? ve.statusImage : ""
+                  }`}
+                >
+                  <Image src={image.link} alt="image" fill sizes="600px" />
                 </div>
               </Link>
-            )}
+            ))}
           </div>
 
           <ActionButtons isWhite={isPhoto} />

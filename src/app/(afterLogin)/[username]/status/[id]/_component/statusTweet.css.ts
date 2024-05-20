@@ -82,6 +82,10 @@ const createAt = style({
   margin: "1.2rem 0",
 });
 
+const whiteColor = style({
+  color: "white",
+});
+
 const ve = {
   wrapper,
   contentWrapper,
@@ -99,5 +103,6 @@ const ve = {
   followButton,
   articleHeader,
   createAt,
+  whiteColor,
 };
 export default ve;

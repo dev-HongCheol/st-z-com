@@ -24,12 +24,12 @@ const tweetInfo = {
 };
 
 interface StatusTweetProps {
-  isPhoto?: boolean;
+  isWhite?: boolean;
 }
 
-const StatusTweet = ({ isPhoto }: StatusTweetProps) => {
+const StatusTweet = ({ isWhite }: StatusTweetProps) => {
   return (
-    <div className={ve.wrapper}>
+    <div className={`${ve.wrapper} ${isWhite && ve.whiteColor}`}>
       <div className={ve.articleHeader}>
         <Avatar
           src={tweetInfo.image}

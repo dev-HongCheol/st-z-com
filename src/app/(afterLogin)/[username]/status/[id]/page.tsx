@@ -6,12 +6,6 @@ import Tweet from "@/app/(afterLogin)/home/_components/Tweet";
 import CommentForm from "./_component/CommentForm";
 import StatusTweet from "./_component/StatusTweet";
 
-//FIXME: testCode
-const me = {
-  name: "devhong",
-  id: "devhong1234",
-  image: "/default_profile_normal.png",
-};
 const SinglePostPage = () => {
   return (
     <article className={ve.SinglePostPageWrapper}>
