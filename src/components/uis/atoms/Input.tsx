@@ -1,4 +1,4 @@
-import React, { ForwardedRef } from "react";
+import React, { ComponentPropsWithoutRef, Ref } from "react";
 import { input, inputWrapper } from "./Input.ts.css";
 
 type InputProps = {
@@ -10,8 +10,14 @@ type InputProps = {
 };
 const Input = React.forwardRef(
   (
-    { id, type = "text", name, placeholder = "", label }: InputProps,
-    ref: ForwardedRef<HTMLInputElement>
+    {
+      id,
+      type = "text",
+      name,
+      placeholder = "",
+      label,
+    }: InputProps & ComponentPropsWithoutRef<"input">,
+    ref: Ref<HTMLInputElement>
   ) => {
     return (
       <div className={inputWrapper}>
