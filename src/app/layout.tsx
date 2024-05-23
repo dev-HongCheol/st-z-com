@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_Gothic } from "next/font/google";
 import "./globals.css";
+import MSWComponent from "./_component/MSWComponent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={natoSans.className}>{children}</body>
+      <body className={natoSans.className}>
+        <MSWComponent />
+        {children}
+      </body>
     </html>
   );
 }

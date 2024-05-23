@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent, useEffect, useRef, useState } from "react";
+import React, { FormEvent, useRef } from "react";
 import Modal from "@/components/uis/modal/Modal";
 import {
   closeBtn,
