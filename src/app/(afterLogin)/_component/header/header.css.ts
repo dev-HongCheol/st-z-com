@@ -20,11 +20,4 @@ const navWrapper = style({
   flex: 1,
 });
 
-const profileBtn = style({
-  marginBottom: "10px",
-  ":hover": {
-    background: "rgb(255,255,255) !important",
-  },
-});
-
-export { header, navWrapper, logoImage, profileBtn };
+export { header, navWrapper, logoImage };

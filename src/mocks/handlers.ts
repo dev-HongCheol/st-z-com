@@ -8,7 +8,7 @@ export const handlers = [
         userId: 1,
         nickName: "데브홍",
         id: "devhong",
-        image: "/img.png",
+        image: "/default_profile_normal.png",
       },
       {
         headers: {
@@ -18,7 +18,7 @@ export const handlers = [
     );
   }),
 
-  http.post("/api/login", () => {
+  http.post("/api/logOut", () => {
     // ...and respond to them using this JSON response.
     return HttpResponse.json(null, {
       headers: {

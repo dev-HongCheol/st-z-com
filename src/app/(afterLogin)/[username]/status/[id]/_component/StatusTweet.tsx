@@ -17,7 +17,7 @@ dayjs.locale(ko);
 
 // FIXME:
 const tweetInfo = {
-  name: "TVING티빙",
+  nickName: "TVING티빙",
   id: "tvingdotcom",
   image: "/default_profile_normal.png",
   writeTime: 1713762611302,
@@ -34,7 +34,7 @@ const StatusTweet = ({ isWhite }: StatusTweetProps) => {
         <Avatar
           src={tweetInfo.image}
           id={tweetInfo.id}
-          name={tweetInfo.name}
+          nickName={tweetInfo.nickName}
           rounded
           isLink
         />

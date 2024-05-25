@@ -5,13 +5,19 @@ import Link from "next/link";
 
 export type AvatarProps = {
   src: string;
-  name: string;
+  nickName: string;
   id: string;
   rounded?: boolean;
   isLink?: boolean;
 };
 
-const Avatar = ({ src, name, id, rounded = false, isLink }: AvatarProps) => {
+const Avatar = ({
+  src,
+  nickName,
+  id,
+  rounded = false,
+  isLink,
+}: AvatarProps) => {
   return (
     <div className={ve.wrapper}>
       <div className={ve.ImgWrapper}>
@@ -39,7 +45,7 @@ const Avatar = ({ src, name, id, rounded = false, isLink }: AvatarProps) => {
       </div>
       <div className={ve.text}>
         <div className={ve.name}>
-          {isLink ? <Link href={`/${id}`}>{name}</Link> : <>{name}</>}
+          {isLink ? <Link href={`/${id}`}>{nickName}</Link> : <>{nickName}</>}
         </div>
         <div className={ve.id}>
           <div className={ve.name}>

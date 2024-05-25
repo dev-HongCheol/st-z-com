@@ -2,16 +2,9 @@ import LogoImage from "@/assets/logo.svg";
 import Image from "next/image";
 import React from "react";
 import MenuList from "./MenuList";
-import { header, logoImage, navWrapper, profileBtn } from "./header.css";
+import { header, logoImage, navWrapper } from "./header.css";
 import Button from "@/components/uis/atoms/Button";
-import Avatar from "@/components/uis/avatar/Avatar";
-
-//FIXME: testCode
-const me = {
-  name: "devhong",
-  id: "devhong1234",
-  image: "/default_profile_normal.png",
-};
+import LogoutButton from "../composeTweet/logoutButton/LogoutButton";
 
 const Header = () => {
   return (
@@ -23,9 +16,7 @@ const Header = () => {
         <MenuList />
       </div>
       <div>
-        <Button className={profileBtn} variant="text">
-          <Avatar src={me.image} id={me.id} name={me.name} rounded />
-        </Button>
+        <LogoutButton />
       </div>
     </header>
   );

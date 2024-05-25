@@ -16,7 +16,6 @@ const SearchInput = ({ q }: SearchInputProps) => {
   const handleSearch = (key: React.KeyboardEvent) => {
     if (key.code === "Enter") {
       key.preventDefault();
-      console.log("🚀  file: SearchInput.tsx:11  handleSearch ,  'Enter'");
     }
   };
 

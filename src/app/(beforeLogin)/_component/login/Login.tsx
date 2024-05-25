@@ -14,16 +14,22 @@ import logoImg from "@/assets/logo.svg";
 import Button from "@/components/uis/atoms/Button";
 import Input from "@/components/uis/atoms/Input";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 const Login = () => {
   const router = useRouter();
-  const textRef = useRef<HTMLInputElement>(null);
+  const idInputRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("🚀  file: Login.tsx:21  onSubmit  event_", event);
-    console.log("1111", textRef.current?.value, passwordRef.current?.value);
+    await signIn("credentials", {
+      username: idInputRef.current?.value,
+      password: passwordRef.current?.value,
+      redirect: false,
+    });
+
+    router.replace("/home");
   };
 
   const onClose = () => {
@@ -52,12 +58,12 @@ const Login = () => {
       </div>
 
       {/* title */}
-      <form className={loginForm} onSubmit={onSubmit}>
+      <form className={loginForm} onSubmit={onSubmit} method="post">
         <h2>X 가입하기</h2>
         {/* <Button variant="outlined">Google 계정으로 로그인</Button>
         <Button variant="outlined">Apple로 로그인</Button> */}
         <br />
-        <Input id="id" name="id" label="아이디" ref={textRef} />
+        <Input id="id" name="id" label="아이디" ref={idInputRef} />
         <Input
           id="password"
           name="password"

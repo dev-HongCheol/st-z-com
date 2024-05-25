@@ -1,4 +1,5 @@
 "use server";
+import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 
 const signup = async (
@@ -6,7 +7,7 @@ const signup = async (
   formData: FormData
 ) => {
   let shouldRedirect = false;
-  console.log("🚀 _ signup _ formData.get(name):", formData.get("name"));
+
   if (!formData.get("name")) {
     return { message: "no_name" };
   }
@@ -23,6 +24,12 @@ const signup = async (
       return { message: "user_exists" };
     }
     shouldRedirect = true;
+
+    signIn("credentials", {
+      id: formData.get("id"),
+      password: formData.get("password"),
+      redirect: false,
+    });
   } catch (e) {
     return { message: "users error" };
   }
