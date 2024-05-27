@@ -12,9 +12,7 @@ const layout = ({ children, modal }: LayoutProps) => {
     <>
       <div className={ve.layoutWrapper}>
         <div className={ve.headerWrapper}>
-          <div>
-            <Header />
-          </div>
+          <Header />
         </div>
         <div className={ve.mainWrapper}>
           <main className={ve.main}>{children}</main>

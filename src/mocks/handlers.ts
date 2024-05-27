@@ -6,8 +6,8 @@ export const handlers = [
     return HttpResponse.json(
       {
         userId: 1,
-        nickName: "데브홍",
-        id: "devhong",
+        nickName: "devhong",
+        id: "devhong620",
         image: "/default_profile_normal.png",
       },
       {
@@ -25,5 +25,22 @@ export const handlers = [
         "Set-Cookie": "connect.sid=;HttpOnly;Path=/;Max-Age=0",
       },
     });
+  }),
+
+  http.get("/api/users/:userId", ({ params }) => {
+    const userId = params.userId;
+    return HttpResponse.json(
+      {
+        userId: 1,
+        nickName: "데브홍",
+        id: "devhong620",
+        image: "/default_profile_normal.png",
+      },
+      {
+        headers: {
+          "Set-Cookie": "connect.sid=msw-cookie;HttpOnly;Path=/",
+        },
+      }
+    );
   }),
 ];

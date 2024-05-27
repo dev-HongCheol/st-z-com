@@ -23,6 +23,9 @@ const badge = style({
   fontSize: "0.8rem",
 });
 
-const ve = { wrapper, title, badge };
+const noTrend = style({
+  padding: "1rem",
+});
+const ve = { wrapper, title, badge, noTrend };
 
 export default ve;
