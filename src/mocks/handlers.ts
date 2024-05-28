@@ -1,3 +1,5 @@
+import { Image } from "@/app/(afterLogin)/home/_components/TweetWrapper";
+import { faker } from "@faker-js/faker";
 import { http, HttpResponse } from "msw";
 
 export const handlers = [
@@ -43,4 +45,154 @@ export const handlers = [
       }
     );
   }),
+
+  http.get("/api/postRecommends", () => {
+    console.log("/api/postRecommends");
+
+    const json = [
+      {
+        postId: 1,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 2,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 3,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 4,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 5,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 6,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 7,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 8,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+      {
+        postId: 9,
+        User: {
+          id: "tving124",
+          nickname: "TVING티빙",
+          image: "/iiLLo4_n_normal.jpg",
+        },
+        createAt: faker.date.between({
+          from: "2024-05-20T00:00:00.000Z",
+          to: "2024-05-30T00:00:00.000Z",
+        }),
+        Images: generateFakerImage(),
+        content: faker.lorem.text(),
+      },
+    ];
+    return HttpResponse.json(json);
+  }),
 ];
+
+const generateFakerImage = () => {
+  const imageLength = Math.floor(Math.random() * 10);
+  let images: Image[] = [];
+
+  if (imageLength < 5) {
+    for (let imageIndex = 0; imageIndex < imageLength; imageIndex++) {
+      images.push({
+        imageId: imageIndex,
+        link: faker.image.urlLoremFlickr(),
+      });
+    }
+  }
+
+  return images;
+};

@@ -19,8 +19,8 @@ const SinglePostPage = () => {
       <article className={ve.articleWrapper}>
         <StatusTweet />
         <CommentForm />
-        <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet />
-        <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet />
+        {/*  <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet />
+        <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> */}
       </article>
     </article>
   );

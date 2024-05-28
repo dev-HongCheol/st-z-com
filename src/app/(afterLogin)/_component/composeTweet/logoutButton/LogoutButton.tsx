@@ -16,7 +16,6 @@ const LogoutButton = () => {
   };
 
   const { data } = useSession();
-  console.log("🚀 _ LogoutButton _ data:", data);
   return (
     <Button className={ve.profileBtn} variant="text" onClick={handleLogout}>
       {data && (

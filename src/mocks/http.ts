@@ -7,7 +7,7 @@ const port = 9090;
 
 app.use(
   cors({
-    origin: "https://dev-next.devhong.cc",
+    origin: ["https://dev-next.devhong.cc", "http://192.168.50.201:3000"],
     optionsSuccessStatus: 200,
     credentials: false,
   })

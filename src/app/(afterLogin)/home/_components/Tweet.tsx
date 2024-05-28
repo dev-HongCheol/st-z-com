@@ -14,32 +14,10 @@ dayjs.locale(ko);
 
 interface TweetProps {
   isPhoto?: boolean;
+  post: Post;
 }
 
-const Tweet = ({ isPhoto }: TweetProps) => {
-  const post: Post = {
-    postId: 1,
-    User: {
-      id: "tving124",
-      nickname: "TVING티빙",
-      image: "/iiLLo4_n_normal.jpg",
-    },
-    createAt: new Date(),
-    Images: [],
-    content: faker.lorem.text(),
-  };
-
-  const imageLength = Math.floor(Math.random() * 10);
-
-  if (imageLength < 5) {
-    for (let imageIndex = 0; imageIndex < imageLength; imageIndex++) {
-      post.Images.push({
-        imageId: imageIndex,
-        link: faker.image.urlLoremFlickr(),
-      });
-    }
-  }
-
+const Tweet = ({ isPhoto, post }: TweetProps) => {
   const getImageCss = (imageLength: number, index: number) => {
     switch (imageLength) {
       case 1: {
