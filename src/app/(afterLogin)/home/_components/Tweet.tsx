@@ -5,7 +5,7 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import ko from "dayjs/locale/ko";
-import TweetWrapper, { Post } from "./TweetWrapper";
+import TweetWrapper, { type Post } from "./TweetWrapper";
 import { faker } from "@faker-js/faker";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 
@@ -27,8 +27,8 @@ const Tweet = ({ isPhoto, post }: TweetProps) => {
         return ve.image2;
       }
       case 3: {
-        if (index == 0) return ve.image3First;
-        else return ve.image3;
+        if (index === 0) return ve.image3First;
+        return ve.image3;
       }
       case 4: {
         return ve.image4;
@@ -37,8 +37,8 @@ const Tweet = ({ isPhoto, post }: TweetProps) => {
   };
 
   const get3GridImage = (imageLength: number, index: number) => {
-    if (imageLength == 3 && index == 0) return ve.image3Grid;
-    else return "";
+    if (imageLength === 3 && index === 0) return ve.image3Grid;
+    return "";
   };
   return (
     <TweetWrapper post={post}>

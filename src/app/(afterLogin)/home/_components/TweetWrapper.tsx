@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 
 export interface Image {
   imageId: number;

@@ -3,7 +3,7 @@
 import React from "react";
 import Tweet from "./Tweet";
 import getPostRecommends from "../_lib/getPostRecommends";
-import { Post } from "./TweetWrapper";
+import type { Post } from "./TweetWrapper";
 import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
 
 const TweetList = () => {
