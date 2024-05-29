@@ -1,7 +1,7 @@
 import React from "react";
 import ve from "./trendForMe.css";
-import Trend from "../../_component/Trend";
 import Link from "next/link";
+import TrendList from "./TrendList";
 
 const TrendForMe = () => {
   return (
@@ -10,18 +10,7 @@ const TrendForMe = () => {
         <h3>나를 위한 트렌드</h3>
       </div>
       {/* trendList */}
-      <>
-        <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-        <Trend locale="한국" trendName="노는언니" />
-        <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-        <Trend locale="한국" trendName="노는언니" />
-        <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-        <Trend locale="한국" trendName="노는언니" />
-        <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-        <Trend locale="한국" trendName="노는언니" />
-        <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-        <Trend locale="한국" trendName="노는언니" />
-      </>
+      <TrendList />
       <Link href={"#"}>더보기</Link>
     </div>
   );

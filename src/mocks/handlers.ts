@@ -255,6 +255,319 @@ export const handlers = [
 		];
 		return HttpResponse.json(json);
 	}),
+
+	http.get("/api/search", ({ request }) => {
+		const json = [
+			{
+				postId: 1,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${faker.lorem.text()}`,
+			},
+			{
+				postId: 2,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${faker.lorem.text()}`,
+			},
+			{
+				postId: 3,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${faker.lorem.text()}`,
+			},
+			{
+				postId: 4,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${faker.lorem.text()}`,
+			},
+			{
+				postId: 5,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${faker.lorem.text()}`,
+			},
+		];
+		return HttpResponse.json(json);
+	}),
+	http.get("/api/users/:userId/posts", ({ params }) => {
+		const userId = params.userId;
+		const json = [
+			{
+				postId: 1,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 2,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 3,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 4,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 5,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId} = ${faker.lorem.text()}`,
+			},
+		];
+		return HttpResponse.json(json);
+	}),
+	http.get("/api/users/:userId/posts/:postId", ({ params }) => {
+		const userId = params.userId;
+		const postId = params.postId;
+		const json = [
+			{
+				postId: 1,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId}_${postId} = ${faker.lorem.text()}`,
+			},
+		];
+		return HttpResponse.json(json);
+	}),
+	http.get("/api/users/:userId/posts/:postId/comments", ({ params }) => {
+		const userId = params.userId;
+		const postId = params.postId;
+		const json = [
+			{
+				postId: 1,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId}_${postId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 2,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId}_${postId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 3,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId}_${postId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 4,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId}_${postId} = ${faker.lorem.text()}`,
+			},
+			{
+				postId: 5,
+				User: {
+					id: "tving124",
+					nickname: "TVING티빙",
+					image: "/iiLLo4_n_normal.jpg",
+				},
+				createAt: faker.date.between({
+					from: "2024-05-20T00:00:00.000Z",
+					to: "2024-05-30T00:00:00.000Z",
+				}),
+				Images: generateFakerImage(),
+				content: `${userId}_${postId} = ${faker.lorem.text()}`,
+			},
+		];
+		return HttpResponse.json(json);
+	}),
+	http.get("/api/followRecommends", () => {
+		return HttpResponse.json([
+			{
+				image: "/iiLLo4_n_normal.jpg",
+				id: "tvingdotcom",
+				nickName: "TVING티빙",
+			},
+			{
+				image: faker.image.avatar(),
+				id: "devHong",
+				nickName: "데브홍",
+			},
+			{
+				image: faker.image.avatar(),
+				id: faker.word.words(),
+				nickName: faker.person.fullName(),
+			},
+			{
+				image: faker.image.avatar(),
+				id: faker.word.words(),
+				nickName: faker.person.fullName(),
+			},
+			{
+				image: faker.image.avatar(),
+				id: faker.string.alpha(),
+				nickName: faker.person.fullName(),
+			},
+		]);
+	}),
+	http.get("/api/trends", () => {
+		return HttpResponse.json([
+			{
+				trendId: 1,
+				name: "하이브의 죄악",
+				posts: 102441,
+			},
+			{
+				trendId: 2,
+				name: "하이브의 죄악",
+				posts: 1041,
+			},
+			{
+				trendId: 3,
+				name: "하이브의 죄악",
+				posts: 102441,
+			},
+			{
+				trendId: 4,
+				name: "하이브의 죄악",
+				posts: 441,
+			},
+			{
+				trendId: 5,
+				name: "하이브의 죄악",
+				posts: 141,
+			},
+			{
+				trendId: 6,
+				name: "하이브의 죄악",
+				posts: 1022441,
+			},
+		]);
+	}),
 ];
 
 const generateFakerImage = () => {

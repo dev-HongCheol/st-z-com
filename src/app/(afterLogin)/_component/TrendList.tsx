@@ -1,13 +1,20 @@
 "use client";
 import React from "react";
-import Trend from "./Trend";
+import Trend, { type ITrend } from "./Trend";
 import ve from "./trendList.css";
 import Link from "next/link";
 
 import { useSession } from "next-auth/react";
+import { useQuery } from "@tanstack/react-query";
+import getTrends from "../_lib/getTrends";
 
 const TrendList = () => {
   const { data: session } = useSession();
+  const { data: trends } = useQuery<ITrend[]>({
+    queryFn: getTrends,
+    queryKey: ["trends"],
+    enabled: !!session?.user,
+  });
 
   return (
     <div className={ve.wrapper}>
@@ -18,18 +25,10 @@ const TrendList = () => {
             <div className={ve.badge}>Beta</div>
           </div>
           {/* trendList */}
-          <>
-            <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-            <Trend locale="한국" trendName="노는언니" />
-            <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-            <Trend locale="한국" trendName="노는언니" />
-            <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-            <Trend locale="한국" trendName="노는언니" />
-            <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-            <Trend locale="한국" trendName="노는언니" />
-            <Trend locale="한국" trendName="하이브의 죄악" posts={100124} />
-            <Trend locale="한국" trendName="노는언니" />
-          </>
+          {trends?.map((trend) => (
+            <Trend locale="한국" trend={trend} key={trend.trendId} />
+          ))}
+
           <Link href={"#"}>더보기</Link>
         </>
       ) : (

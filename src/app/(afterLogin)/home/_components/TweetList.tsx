@@ -4,7 +4,7 @@ import React from "react";
 import Tweet from "./Tweet";
 import getPostRecommends from "../_lib/getPostRecommends";
 import type { Post } from "./TweetWrapper";
-import { QueryClient, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const TweetList = () => {
   const { data: tweets, error } = useQuery<Post[]>({

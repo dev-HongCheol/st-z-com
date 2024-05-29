@@ -1,5 +1,5 @@
 "use client";
-import Tab, { ITab } from "@/components/uis/tab/Tab";
+import Tab, { type ITab } from "@/components/uis/tab/Tab";
 import React from "react";
 
 const ProfileTab = () => {

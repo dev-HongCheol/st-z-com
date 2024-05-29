@@ -1,5 +1,5 @@
 "use client";
-import Tab, { ITab } from "@/components/uis/tab/Tab";
+import Tab, { type ITab } from "@/components/uis/tab/Tab";
 import React, { useMemo } from "react";
 import ve from "./searchTab.css";
 import { useRouter, useSearchParams } from "next/navigation";

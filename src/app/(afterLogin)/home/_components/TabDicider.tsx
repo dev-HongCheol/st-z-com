@@ -6,7 +6,6 @@ import FollowingList from "./FollowingList";
 
 const TabDivider = () => {
   const { tab } = useContext(HomeContext);
-  console.log("🚀 _ TabDivider _ tab:", tab);
   return tab === "recommended" ? <TweetList /> : <FollowingList />;
 };
 

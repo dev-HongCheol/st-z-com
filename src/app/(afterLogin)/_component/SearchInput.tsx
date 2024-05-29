@@ -1,7 +1,9 @@
 "use client";
-import React, { useRef, useState } from "react";
+import type React from "react";
+import { useRef, useState } from "react";
 import ve from "./searchInput.css";
 import Search from "@/components/icons/Search";
+import { useRouter } from "next/navigation";
 
 interface SearchInputProps {
   q?: string;
@@ -13,9 +15,11 @@ const SearchInput = ({ q }: SearchInputProps) => {
   const [isFocusInput, setIsFocusInput] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [search, setSearch] = useState(q || "");
+  const router = useRouter();
   const handleSearch = (key: React.KeyboardEvent) => {
-    if (key.code === "Enter") {
+    if (key.code === "Enter" && searchInputRef.current?.value) {
       key.preventDefault();
+      router.push(`/search?q=${searchInputRef.current?.value}`);
     }
   };
 
