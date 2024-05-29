@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, createContext, useCallback, useState } from "react";
+import React, { type ReactNode, createContext, useState } from "react";
 
 export type HomeTopTabNames = "recommended" | "follow";
 

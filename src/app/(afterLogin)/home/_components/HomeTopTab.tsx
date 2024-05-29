@@ -1,8 +1,7 @@
 "use client";
 import React, { useContext } from "react";
-
-import { HomeContext, HomeTopTabNames } from "./Provider";
-import Tab, { ITab } from "@/components/uis/tab/Tab";
+import { HomeContext, type HomeTopTabNames } from "./Provider";
+import Tab, { type ITab } from "@/components/uis/tab/Tab";
 import ve from "./homeTopTab.css";
 
 const tabs: ITab[] = [
@@ -17,9 +16,9 @@ const tabs: ITab[] = [
 ];
 // FIXME: 화설화된 탭만 아래 표기되게 수정 필요
 const HomeTopTab = () => {
-  const { tab, setTab } = useContext(HomeContext);
+  const { setTab } = useContext(HomeContext);
   const onSelectedTab = (tab: ITab) => {
-    setTab(tab.label as HomeTopTabNames);
+    setTab(tab.value as HomeTopTabNames);
   };
   return (
     <div className={ve.homeTopTabWrapper}>

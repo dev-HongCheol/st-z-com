@@ -10,6 +10,7 @@ import {
   HydrationBoundary,
 } from "@tanstack/react-query";
 import getPostRecommends from "./_lib/getPostRecommends";
+import TabDivider from "./_components/TabDicider";
 
 const HomePage = async () => {
   const queryClient = new QueryClient();
@@ -24,7 +25,7 @@ const HomePage = async () => {
       <HomeTopTab />
       <WriteForm />
       <HydrationBoundary state={dehydratedState}>
-        <TweetList />
+        <TabDivider />
       </HydrationBoundary>
     </HomeContextProvider>
   );
