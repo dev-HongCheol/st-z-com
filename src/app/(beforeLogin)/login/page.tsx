@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 export default function LoginPage() {
   const router = useRouter();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     router.replace("/i/flow/login");
   }, []);

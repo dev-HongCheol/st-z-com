@@ -7,7 +7,6 @@ import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons"
 import CloseButton from "./CloseButton";
 import StatusTweet from "../../[username]/status/[id]/_component/StatusTweet";
 import CommentForm from "../../[username]/status/[id]/_component/CommentForm";
-import Tweet from "../../home/_components/Tweet";
 import {
   HydrationBoundary,
   QueryClient,

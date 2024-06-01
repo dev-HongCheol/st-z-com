@@ -12,9 +12,7 @@ const TweetList = () => {
     queryFn: getPostRecommends,
   });
 
-  return tweets?.map((tweet) => (
-    <Tweet post={tweet} key={tweet.postId} isNoneBorder />
-  ));
+  return tweets?.map((tweet) => <Tweet post={tweet} key={tweet.postId} />);
 };
 
 export default TweetList;
