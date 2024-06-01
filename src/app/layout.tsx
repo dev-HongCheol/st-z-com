@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Noto_Sans_Gothic } from "next/font/google";
 import "./globals.css";
-import MSWComponent from "./_component/MSWComponent";
 import SessionProvider from "@/components/providers/SessionProvider";
 import RqProvider from "@/components/providers/RqProvider";
 
@@ -25,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={natoSans.className}>
-        <MSWComponent />
         <SessionProvider>
           <RqProvider>{children}</RqProvider>
         </SessionProvider>
