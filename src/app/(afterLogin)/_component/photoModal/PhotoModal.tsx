@@ -1,34 +1,27 @@
-//FIXME:
-
 "use client";
 
 import React, { useEffect } from "react";
 import ve from "./photoModal.css";
 import Image from "next/image";
-import { Post } from "../../home/_components/TweetWrapper";
-import { faker } from "@faker-js/faker";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 import CloseButton from "./CloseButton";
 import StatusTweet from "../../[username]/status/[id]/_component/StatusTweet";
 import CommentForm from "../../[username]/status/[id]/_component/CommentForm";
 import Tweet from "../../home/_components/Tweet";
+import {
+  HydrationBoundary,
+  QueryClient,
+  dehydrate,
+  useQuery,
+} from "@tanstack/react-query";
+import getPhotoPost from "./_lib/getPhotoPost";
+import getPostComments from "../../[username]/status/[id]/_lib/getPostComments";
+import PhotoPostCommentsList from "./_component/PhotoPostCommentsList";
 
-type ModalProps = {};
-const PhotoModal = () => {
-  const post: Post = {
-    postId: 1,
-    User: {
-      id: "tving124",
-      nickname: "TVING티빙",
-      image: "/iiLLo4_n_normal.jpg",
-    },
-    createAt: new Date(),
-    Images: [],
-    content: faker.lorem.text(),
-  };
-
-  post.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() });
-
+type PhotoModalProps = {
+  userId: string;
+};
+const PhotoModal = ({ userId }: PhotoModalProps) => {
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) body.style.overflow = "hidden";
@@ -37,6 +30,22 @@ const PhotoModal = () => {
       if (body) body.style.overflow = "initial";
     };
   }, []);
+
+  const { data: photoPost } = useQuery({
+    queryFn: getPhotoPost,
+    queryKey: ["posts", userId, "photo"],
+  });
+
+  const queryClient = new QueryClient();
+  queryClient.prefetchQuery({
+    queryFn: getPostComments,
+    queryKey: ["posts", userId, "comments"],
+  });
+
+  const hydrateState = dehydrate(queryClient);
+
+  if (!photoPost) return null;
+
   return (
     <div className={ve.modal}>
       <div className={ve.wrapper}>
@@ -46,12 +55,11 @@ const PhotoModal = () => {
             <CloseButton />
           </div>
           <div className={ve.image}>
-            {post.Images && post.Images.length && (
+            {photoPost.Images?.length && (
               <Image
-                src={post.Images[0].link}
+                src={photoPost.Images[0].link}
                 alt=""
-                width={500}
-                height={400}
+                fill
                 priority
                 sizes="500px"
               />
@@ -63,16 +71,11 @@ const PhotoModal = () => {
         </div>
         {/* tweet */}
         <div className={ve.tweetWrapper}>
-          <StatusTweet isWhite />
+          <StatusTweet isWhite userId={userId} />
           <CommentForm isPhoto />
-          <div>
-            <Tweet isPhoto />
-            <Tweet isPhoto />
-            <Tweet isPhoto />
-            <Tweet isPhoto />
-            <Tweet isPhoto />
-            <Tweet isPhoto />
-          </div>
+          <HydrationBoundary state={hydrateState}>
+            <PhotoPostCommentsList userId={userId} />
+          </HydrationBoundary>
         </div>
       </div>
     </div>

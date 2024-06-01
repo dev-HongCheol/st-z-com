@@ -4,15 +4,14 @@ import React from "react";
 interface PhotoPageProps {
   params: {
     username: string;
-    id: string;
-    photoId: string;
   };
 }
+
 const PhotoPage = ({ params }: PhotoPageProps) => {
-  console.log("PhotoPage");
+  const { username: userId } = params;
   return (
     <>
-      <PhotoModal />
+      <PhotoModal userId={userId} />
     </>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
-import React, { FormEvent, useRef, useState } from "react";
+import type React from "react";
+import { type FormEvent, useRef, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/uis/atoms/Button";
 import MediaUpload from "@/components/icons/MediaUpload";

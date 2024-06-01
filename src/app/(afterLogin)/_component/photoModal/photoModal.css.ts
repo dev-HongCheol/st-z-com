@@ -36,6 +36,7 @@ const image = style({
   justifyContent: "center",
   alignItems: "center",
   flexGrow: 1,
+  position: "relative",
 });
 
 const actionButtonsWrapper = style({
