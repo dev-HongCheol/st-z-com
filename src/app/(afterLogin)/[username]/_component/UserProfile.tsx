@@ -2,19 +2,18 @@ import Image from "next/image";
 import React from "react";
 import ve from "./userProfile.css";
 import Button from "@/components/uis/atoms/Button";
+import type { User } from "@/types/User";
 
-const UserProfile = () => {
-  //FIXME: testCode
-  const me = {
-    name: "devhong",
-    image: "/default_profile_400x400.png",
-    id: "devhong124",
-  };
+interface UserProfileProps {
+  profile: User;
+}
+
+const UserProfile = ({ profile }: UserProfileProps) => {
   return (
     <div>
       <div className={ve.garyBg}>
         <Image
-          src={me.image}
+          src={profile.image}
           width={135}
           height={135}
           alt="profile image"
@@ -29,8 +28,8 @@ const UserProfile = () => {
         </div>
       </div>
       <div className={ve.userMetaInfo}>
-        <p className={ve.userName}>{me.name}</p>
-        <p className={ve.userId}>@{me.id}</p>
+        <p className={ve.userName}>{profile.nickName}</p>
+        <p className={ve.userId}>@{profile.id}</p>
       </div>
     </div>
   );

@@ -15,9 +15,10 @@ dayjs.locale(ko);
 interface TweetProps {
   isPhoto?: boolean;
   post: Post;
+  isNoneBorder?: boolean;
 }
 
-const Tweet = ({ isPhoto, post }: TweetProps) => {
+const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
   const getImageCss = (imageLength: number, index: number) => {
     switch (imageLength) {
       case 1: {
@@ -42,7 +43,11 @@ const Tweet = ({ isPhoto, post }: TweetProps) => {
   };
   return (
     <TweetWrapper post={post}>
-      <div className={`${ve.wrapper} ${isPhoto && ve.colorWhite}`}>
+      <div
+        className={`${ve.wrapper} ${isPhoto && ve.colorWhite} ${
+          isNoneBorder && ve.noneBorder
+        }`}
+      >
         <div className={ve.avatar}>
           <Image src={post.User.image} alt="profile" width={40} height={40} />
         </div>

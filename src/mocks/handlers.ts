@@ -30,20 +30,22 @@ export const handlers = [
 	}),
 
 	http.get("/api/users/:userId", ({ params }) => {
+		console.log("🚀 _ http.get _ params.userId:", params.userId);
 		const userId = params.userId;
-		return HttpResponse.json(
+		return HttpResponse.json({
+			userId: 1,
+			nickName: "데브홍",
+			id: userId,
+			image: "/default_profile_normal.png",
+		});
+		/* return HttpResponse.json(
 			{
-				userId: 1,
-				nickName: "데브홍",
-				id: "devhong620",
-				image: "/default_profile_normal.png",
+				message: "no_search_user",
 			},
 			{
-				headers: {
-					"Set-Cookie": "connect.sid=msw-cookie;HttpOnly;Path=/",
-				},
+				status: 404,
 			},
-		);
+		); */
 	}),
 
 	http.get("/api/postRecommends", () => {
@@ -519,17 +521,17 @@ export const handlers = [
 			},
 			{
 				image: faker.image.avatar(),
-				id: faker.word.words(),
+				id: faker.person.firstName(),
 				nickName: faker.person.fullName(),
 			},
 			{
 				image: faker.image.avatar(),
-				id: faker.word.words(),
+				id: faker.person.firstName(),
 				nickName: faker.person.fullName(),
 			},
 			{
 				image: faker.image.avatar(),
-				id: faker.string.alpha(),
+				id: faker.person.firstName(),
 				nickName: faker.person.fullName(),
 			},
 		]);
