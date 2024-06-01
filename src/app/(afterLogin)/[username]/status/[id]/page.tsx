@@ -1,12 +1,14 @@
 import React from "react";
 import BackButton from "../../_component/BackButton";
 import ve from "./singlePostPage.css";
-
-import Tweet from "@/app/(afterLogin)/home/_components/Tweet";
 import CommentForm from "./_component/CommentForm";
 import StatusTweet from "./_component/StatusTweet";
-
-const SinglePostPage = () => {
+interface SinglePostPageProps {
+  params: {
+    username: string;
+  };
+}
+const SinglePostPage = ({ params }: SinglePostPageProps) => {
   return (
     <article className={ve.SinglePostPageWrapper}>
       <div className={ve.header}>
@@ -17,7 +19,7 @@ const SinglePostPage = () => {
       </div>
 
       <article className={ve.articleWrapper}>
-        <StatusTweet />
+        <StatusTweet userId={params.username} />
         <CommentForm />
         {/*  <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet />
         <Tweet /> <Tweet /> <Tweet /> <Tweet /> <Tweet /> */}

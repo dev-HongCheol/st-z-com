@@ -1,40 +1,40 @@
+"use client";
+
 import React from "react";
 import ve from "./statusTweet.css";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import ko from "dayjs/locale/ko";
-import Comment from "@/components/icons/Comment";
 import Button from "@/components/uis/atoms/Button";
-import ReTweet from "@/components/icons/ReTweet";
-import Heart from "@/components/icons/Heart";
-import Views from "@/components/icons/Views";
 import Avatar from "@/components/uis/avatar/Avatar";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
-import Tweet from "@/app/(afterLogin)/home/_components/Tweet";
+import getSinglePost from "../_lib/getSinglePost";
+import { useQuery } from "@tanstack/react-query";
+import type { Post } from "@/app/(afterLogin)/home/_components/TweetWrapper";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
 
-// FIXME:
-const tweetInfo = {
-  nickName: "TVING티빙",
-  id: "tvingdotcom",
-  image: "/default_profile_normal.png",
-  writeTime: 1713762611302,
-};
-
 interface StatusTweetProps {
   isWhite?: boolean;
+  userId: string;
 }
 
-const StatusTweet = ({ isWhite }: StatusTweetProps) => {
+const StatusTweet = ({ userId, isWhite }: StatusTweetProps) => {
+  const { data: post } = useQuery<Post, object, Post, [string, string]>({
+    queryFn: getSinglePost,
+    queryKey: ["posts", userId],
+  });
+
+  if (!post) return null;
+
   return (
     <div className={`${ve.wrapper} ${isWhite && ve.whiteColor}`}>
       <div className={ve.articleHeader}>
         <Avatar
-          src={tweetInfo.image}
-          id={tweetInfo.id}
-          nickName={tweetInfo.nickName}
+          src={post.User.image}
+          id={post.User.id}
+          nickName={post.User.nickname}
           rounded
           isLink
         />
@@ -43,23 +43,13 @@ const StatusTweet = ({ isWhite }: StatusTweetProps) => {
       <div className={ve.contentWrapper}>
         <div className={ve.tweetContent}>
           {/* tweetContent */}
-          <div>
-            여고추리반3
-            <br />
-            <br />
-            평점 114214/141
-            <br />
-            <br />
-            출연진들의 찐 반응을..
-            <br />
-            미스터리 어드벤처
-          </div>
+          <div>{post.content}</div>
 
           <div className={ve.createAt}>
-            {dayjs(tweetInfo.writeTime).format("A h:mm · YYYY년 M월 D일")}
+            {dayjs(post.createAt).format("A h:mm · YYYY년 M월 D일")}
           </div>
 
-          <ActionButtons isWhite />
+          <ActionButtons />
         </div>
       </div>
     </div>
