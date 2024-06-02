@@ -1,5 +1,6 @@
 "use client";
-import React, { FormEvent, useMemo, useRef, useState } from "react";
+import type React from "react";
+import { type FormEvent, useRef, useState } from "react";
 import {
   avatar,
   avatarImage,
@@ -18,14 +19,10 @@ import Button from "@/components/uis/atoms/Button";
 import MediaUpload from "@/components/icons/MediaUpload";
 import GifUpload from "@/components/icons/GifUpload";
 import Link from "next/link";
-
-//FIXME: testCode
-const me = {
-  name: "devhong",
-  image: "/default_profile_normal.png",
-};
+import { useSession } from "next-auth/react";
 
 const WriteForm = () => {
+  const { data: session } = useSession();
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -60,7 +57,7 @@ const WriteForm = () => {
     <div className={writeFormWrapper}>
       <div className={avatar}>
         <Image
-          src={me.image}
+          src={session?.user.image as string}
           alt="profileImage"
           className={avatarImage}
           width={40}

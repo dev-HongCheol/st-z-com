@@ -8,12 +8,7 @@ import GifUpload from "@/components/icons/GifUpload";
 
 import { usePathname } from "next/navigation";
 import ve from "./commentForm.css";
-
-//FIXME: testCode
-const me = {
-  name: "devhong",
-  image: "/default_profile_normal.png",
-};
+import { useSession } from "next-auth/react";
 
 interface CommentFormProps {
   isPhoto?: boolean;
@@ -52,13 +47,15 @@ const CommentForm = ({ isPhoto }: CommentFormProps) => {
     setIsSubmitDisabled(event.target.value.length === 0);
   };
 
+  const { data: session } = useSession();
+
   return (
     <>
       <div className={ve.postUserId}>@{postUserId} 님에게 보내는 댓글</div>
       <div className={ve.wrapper}>
         <div className={ve.avatar}>
           <Image
-            src={me.image}
+            src={session?.user.image as string}
             alt="profileImage"
             className={ve.avatarImage}
             width={40}

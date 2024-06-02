@@ -14,7 +14,6 @@ const tabs: ITab[] = [
     value: "follow",
   },
 ];
-// FIXME: 화설화된 탭만 아래 표기되게 수정 필요
 const HomeTopTab = () => {
   const { setTab } = useContext(HomeContext);
   const onSelectedTab = (tab: ITab) => {
