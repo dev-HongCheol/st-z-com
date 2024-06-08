@@ -1,6 +1,12 @@
 "use client";
 import type React from "react";
-import { type FormEvent, useRef, useState } from "react";
+import {
+  type FormEvent,
+  useRef,
+  useState,
+  type ChangeEvent,
+  useEffect,
+} from "react";
 import {
   avatar,
   avatarImage,
@@ -19,7 +25,6 @@ import Button from "@/components/uis/atoms/Button";
 import MediaUpload from "@/components/icons/MediaUpload";
 import GifUpload from "@/components/icons/GifUpload";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 import type { User } from "next-auth";
 
 interface WriteFormProps {
@@ -29,8 +34,14 @@ interface WriteFormProps {
 const WriteForm = ({ user }: WriteFormProps) => {
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
+  const [preViewImageFiles, setPreViewImageFiles] = useState<
+    {
+      index: number;
+      dataUrl: string;
+      file: File;
+    }[]
+  >([]);
 
   const mediaInput = useRef<HTMLInputElement>(null);
   const handleUploadMedia = () => {
@@ -41,8 +52,46 @@ const WriteForm = ({ user }: WriteFormProps) => {
     setIsClickedTextarea(true);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    console.log("handleSubmit");
+  const handlePreViewImage = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
+    if (event.target.files) {
+      const files = Array.from(event.target.files);
+      files.forEach((file, index) => {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          setPreViewImageFiles((pre) => {
+            if (pre)
+              return [
+                ...pre,
+                {
+                  index,
+                  dataUrl: reader.result as string,
+                  file,
+                },
+              ];
+            return [];
+          });
+        };
+
+        reader.readAsDataURL(file);
+      });
+    }
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.set("content", textareaRef.current?.value || "");
+    for (const preViewImageFile of preViewImageFiles) {
+      formData.append("images", preViewImageFile.file);
+    }
+
+    await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/posts`, {
+      method: "post",
+      credentials: "include",
+      body: formData,
+    });
   };
 
   function adjustTextareaHeight() {
@@ -55,6 +104,23 @@ const WriteForm = ({ user }: WriteFormProps) => {
 
   const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIsSubmitDisabled(event.target.value.length === 0);
+  };
+
+  const handleRemoveImage = (index: number) => {
+    setPreViewImageFiles((pre) => pre.filter((image) => image.index !== index));
+
+    if (mediaInput.current) {
+      if (mediaInput.current.files) {
+        const files = Array.from(mediaInput.current.files);
+        const dataTransfer = new DataTransfer();
+        files.forEach((file: File, _index: number) => {
+          if (index !== _index) {
+            dataTransfer.items.add(file);
+          }
+        });
+        mediaInput.current.files = dataTransfer.files;
+      }
+    }
   };
 
   return (
@@ -77,6 +143,19 @@ const WriteForm = ({ user }: WriteFormProps) => {
           onChange={onChangeTextarea}
           onInput={adjustTextareaHeight}
         />
+        {/* preview */}
+        <div>
+          {preViewImageFiles.map((preViewImageFile) => (
+            <Image
+              src={preViewImageFile.dataUrl}
+              alt="image preview"
+              key={preViewImageFile.index}
+              width={50}
+              height={50}
+              onClick={() => handleRemoveImage(preViewImageFile.index)}
+            />
+          ))}
+        </div>
         {isClickedTextarea && (
           <Link href={"#"} className={comment}>
             모든 사람들이 답글을 달 수 있습니다.
@@ -100,6 +179,7 @@ const WriteForm = ({ user }: WriteFormProps) => {
               multiple
               accept="image/*"
               ref={mediaInput}
+              onChange={handlePreViewImage}
             />
             <Button variant="text" className={contentUploadBtn} title="GIF">
               <GifUpload />

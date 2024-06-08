@@ -31,3 +31,7 @@ a:active {
 body {
   font-size: 14px;
 }
+
+textarea{
+  font-family: 'Malgun Gothic';
+}
