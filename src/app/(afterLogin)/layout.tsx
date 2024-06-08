@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 import Header from "./_component/header/Header";
 import ve from "./layout.css";
 import Aside from "./_component/Aside";

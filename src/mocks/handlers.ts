@@ -1,7 +1,9 @@
 import type { Image } from "@/app/(afterLogin)/home/_components/TweetWrapper";
 import { faker } from "@faker-js/faker";
 import { http, HttpResponse } from "msw";
-
+function sleep(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
 export const handlers = [
 	// Intercept "GET https://example.com/user" requests...
 	http.post("/api/login", () => {
@@ -48,9 +50,15 @@ export const handlers = [
 		); */
 	}),
 
-	http.get("/api/postRecommends?cursor=0", ({ request }) => {
+	http.get("/api/postRecommends", async ({ request }) => {
 		const url = new URL(request.url);
 		const cursor = Number(url.searchParams.get("cursor") || "0") || 0;
+
+		await sleep(3000);
+
+		if (cursor > 30) {
+			return HttpResponse.json([]);
+		}
 
 		const json = [
 			{
@@ -183,7 +191,8 @@ export const handlers = [
 		return HttpResponse.json(json);
 	}),
 
-	http.get("/api/followingPosts", () => {
+	http.get("/api/followingPosts", async () => {
+		await sleep(5000);
 		const json = [
 			{
 				postId: 1,

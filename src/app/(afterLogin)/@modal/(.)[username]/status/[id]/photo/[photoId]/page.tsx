@@ -1,11 +1,16 @@
 import PhotoModal from "@/app/(afterLogin)/_component/photoModal/PhotoModal";
 import React from "react";
 
-const PhotoPage = () => {
-  console.log("modal");
+interface PhotoPageProps {
+  params: {
+    username: string;
+  };
+}
+const PhotoPage = ({ params }: PhotoPageProps) => {
+  const { username: userId } = params;
   return (
     <>
-      <PhotoModal />
+      <PhotoModal userId={userId} />
     </>
   );
 };

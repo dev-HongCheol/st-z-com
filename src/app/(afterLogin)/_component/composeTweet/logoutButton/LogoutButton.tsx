@@ -16,13 +16,16 @@ const LogoutButton = () => {
   };
 
   const { data } = useSession();
+  if (data?.user) {
+    return;
+  }
   return (
     <Button className={ve.profileBtn} variant="text" onClick={handleLogout}>
       {data && (
         <Avatar
-          src={data?.user!.image as string}
-          id={data?.user!.id as string}
-          nickName={data?.user!.nickName as string}
+          src={data.user.image as string}
+          id={data.user.id as string}
+          nickName={data.user.nickname as string}
           rounded
         />
       )}
