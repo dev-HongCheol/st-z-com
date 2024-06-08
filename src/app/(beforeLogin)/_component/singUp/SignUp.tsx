@@ -11,7 +11,7 @@ import { useFormState, useFormStatus } from "react-dom";
 
 const showMessage = (message: string) => {
   switch (message) {
-    case "no_name": {
+    case "no_nickname": {
       return "이름을 입력해주세요.";
     }
   }
@@ -36,7 +36,7 @@ const SignUp = () => {
             className={vx.logoImage}
           />
         </div>
-        <div className={vx.headerFlex}></div>
+        <div className={vx.headerFlex} />
       </div>
 
       {/* title */}
@@ -51,7 +51,7 @@ const SignUp = () => {
             label="비밀번호"
             type="password"
           />
-          <Input id="name" name="name" label="이름" />
+          <Input id="nickname" name="nickname" label="이름" />
           <Input
             id="image"
             name="image"

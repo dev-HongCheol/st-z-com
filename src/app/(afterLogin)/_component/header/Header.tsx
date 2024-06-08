@@ -23,7 +23,7 @@ const Header = async () => {
             <MenuList />
           </div>
           <div>
-            <LogoutButton />
+            <LogoutButton user={session.user} />
           </div>
         </>
       )}

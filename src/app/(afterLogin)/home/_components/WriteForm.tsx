@@ -20,9 +20,13 @@ import MediaUpload from "@/components/icons/MediaUpload";
 import GifUpload from "@/components/icons/GifUpload";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import type { User } from "next-auth";
 
-const WriteForm = () => {
-  const { data: session } = useSession();
+interface WriteFormProps {
+  user: User;
+}
+
+const WriteForm = ({ user }: WriteFormProps) => {
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -57,7 +61,7 @@ const WriteForm = () => {
     <div className={writeFormWrapper}>
       <div className={avatar}>
         <Image
-          src={session?.user.image as string}
+          src={user.image as string}
           alt="profileImage"
           className={avatarImage}
           width={40}
