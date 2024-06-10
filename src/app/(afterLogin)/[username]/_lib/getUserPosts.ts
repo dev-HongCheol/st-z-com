@@ -12,9 +12,11 @@ const getUserPosts: QueryFunction<Post[], [string, string, string]> = async ({
 				tags: ["posts", "users", username],
 			},
 			cache: "no-store",
+			credentials: "include",
 		},
 	);
 	if (!res.ok) {
+		console.log(await res.text());
 		throw new Error("failed to fetch getUser data");
 	}
 	return res.json();

@@ -1,13 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import ve from "./searchFilter.css";
 import { useRouter, useSearchParams } from "next/navigation";
 
 const SearchFilter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const [selectedFilter, setSelectedFilter] = useState<string>("allUser");
   const handleSelectedFilter = (filter: string) => {
+    setSelectedFilter(filter);
     if (filter === "allUser") {
       const newSearchParams = new URLSearchParams(searchParams);
       newSearchParams.delete("pf");
@@ -34,7 +37,8 @@ const SearchFilter = () => {
               name="userType"
               id="allUser"
               value="allUser"
-              onClick={() => handleSelectedFilter("allUser")}
+              checked={selectedFilter === "allUser"}
+              onChange={() => handleSelectedFilter("allUser")}
             />
           </div>
           <div className={ve.inputWrapper}>
@@ -44,7 +48,8 @@ const SearchFilter = () => {
               name="userType"
               id="myFollow"
               value="myFollow"
-              onClick={() => handleSelectedFilter("myFollow")}
+              checked={selectedFilter === "myFollow"}
+              onChange={() => handleSelectedFilter("myFollow")}
             />
           </div>
         </div>
