@@ -13,15 +13,20 @@ const getSearchResult: QueryFunction<
 		},
 	]
 > = async ({ queryKey }) => {
-	const [_1, _2, { q, pf, p }] = queryKey;
+	const [_1, _2, searchParams] = queryKey;
+
+	const urlSearchParams = new URLSearchParams(searchParams);
 
 	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_BASE_URL}/api/search?${q ? `q=${q}` : ""}`,
+		`${
+			process.env.NEXT_PUBLIC_BASE_URL
+		}/api/posts?${urlSearchParams.toString()}`,
 		{
 			next: {
-				tags: ["post", "search", q],
+				tags: ["post", "search", urlSearchParams.get("q") || ""],
 			},
 			cache: "no-store",
+			credentials: "include",
 		},
 	);
 	if (!res.ok) {

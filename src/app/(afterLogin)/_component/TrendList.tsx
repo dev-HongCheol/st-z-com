@@ -26,7 +26,7 @@ const TrendList = () => {
           </div>
           {/* trendList */}
           {trends?.map((trend) => (
-            <Trend locale="한국" trend={trend} key={trend.trendId} />
+            <Trend locale="한국" trend={trend} key={trend.title} />
           ))}
 
           <Link href={"#"}>더보기</Link>

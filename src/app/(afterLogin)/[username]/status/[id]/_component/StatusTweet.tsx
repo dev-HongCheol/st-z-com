@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import ve from "./statusTweet.css";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -9,7 +9,7 @@ import Button from "@/components/uis/atoms/Button";
 import Avatar from "@/components/uis/avatar/Avatar";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 import getSinglePost from "../_lib/getSinglePost";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type { Post } from "@/app/(afterLogin)/home/_components/TweetWrapper";
 
 dayjs.extend(relativeTime);
@@ -26,6 +26,19 @@ const StatusTweet = ({ userId, isWhite }: StatusTweetProps) => {
     queryKey: ["posts", userId],
   });
 
+  const mutation = useMutation({
+    mutationFn: async (userId: string) => {
+      const res = fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${userId}/follow`,
+        { method: "post", credentials: "include" }
+      );
+    },
+  });
+  const handleFollow = (event: React.MouseEvent, userId: string) => {
+    event.preventDefault();
+    mutation.mutate(userId);
+  };
+
   if (!post) return null;
 
   return (
@@ -38,7 +51,14 @@ const StatusTweet = ({ userId, isWhite }: StatusTweetProps) => {
           rounded
           isLink
         />
-        <Button className={ve.followButton}>팔로우</Button>
+        <Button
+          className={ve.followButton}
+          onClick={(event: React.MouseEvent) =>
+            handleFollow(event, post.User.id)
+          }
+        >
+          팔로우
+        </Button>
       </div>
       <div className={ve.contentWrapper}>
         <div className={ve.tweetContent}>

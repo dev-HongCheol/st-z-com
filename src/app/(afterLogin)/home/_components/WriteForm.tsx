@@ -1,12 +1,6 @@
 "use client";
 import type React from "react";
-import {
-  type FormEvent,
-  useRef,
-  useState,
-  type ChangeEvent,
-  useEffect,
-} from "react";
+import { type FormEvent, useRef, useState, type ChangeEvent } from "react";
 import {
   avatar,
   avatarImage,
@@ -26,6 +20,12 @@ import MediaUpload from "@/components/icons/MediaUpload";
 import GifUpload from "@/components/icons/GifUpload";
 import Link from "next/link";
 import type { User } from "next-auth";
+import {
+  type InfiniteData,
+  useQueryClient,
+  useMutation,
+} from "@tanstack/react-query";
+import type { Post } from "./TweetWrapper";
 
 interface WriteFormProps {
   user: User;
@@ -34,6 +34,7 @@ interface WriteFormProps {
 const WriteForm = ({ user }: WriteFormProps) => {
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
   const [preViewImageFiles, setPreViewImageFiles] = useState<
     {
@@ -51,6 +52,36 @@ const WriteForm = ({ user }: WriteFormProps) => {
   const handleFocusTextarea = () => {
     setIsClickedTextarea(true);
   };
+
+  const writePost = (formData: FormData) => {
+    return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+      method: "post",
+      credentials: "include",
+      body: formData,
+    });
+  };
+
+  const mutation = useMutation({
+    mutationFn: writePost,
+    onSuccess: async (data, variables) => {
+      if (data.ok) {
+        if (formRef.current) formRef.current.reset();
+
+        const newPost: Post = await data.json();
+        queryClient.setQueryData(
+          ["tweet", "recommends"],
+          (pre: InfiniteData<Post[]>) => {
+            const prePost = structuredClone(pre);
+            prePost.pages[0].unshift(newPost);
+            return prePost;
+          }
+        );
+      }
+    },
+    onError: (error) => {
+      console.error(error);
+    },
+  });
 
   const handlePreViewImage = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -79,6 +110,7 @@ const WriteForm = ({ user }: WriteFormProps) => {
     }
   };
 
+  const queryClient = useQueryClient();
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData();
@@ -86,12 +118,7 @@ const WriteForm = ({ user }: WriteFormProps) => {
     for (const preViewImageFile of preViewImageFiles) {
       formData.append("images", preViewImageFile.file);
     }
-
-    await fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/posts`, {
-      method: "post",
-      credentials: "include",
-      body: formData,
-    });
+    mutation.mutate(formData);
   };
 
   function adjustTextareaHeight() {
@@ -134,7 +161,7 @@ const WriteForm = ({ user }: WriteFormProps) => {
           height={40}
         />
       </div>
-      <form className={writeForm} onSubmit={handleSubmit}>
+      <form className={writeForm} onSubmit={handleSubmit} ref={formRef}>
         <textarea
           className={formTextarea}
           placeholder="무슨 일이 있어나고 있나요?"

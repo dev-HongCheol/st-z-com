@@ -7,9 +7,10 @@ const getPostRecommends = async ({ pageParam }: getPostRecommendsProps) => {
 		`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/recommends?cursor=${pageParam}`,
 		{
 			next: {
-				tags: ["tweet", "followings"],
+				tags: ["tweet", "recommends"],
 			},
 			cache: "no-store",
+			credentials: "include",
 		},
 	);
 	if (!res.ok) {

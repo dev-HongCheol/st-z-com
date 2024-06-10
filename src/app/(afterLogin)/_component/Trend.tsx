@@ -3,9 +3,8 @@ import ve from "./trend.css";
 import Link from "next/link";
 
 export interface ITrend {
-  name: string;
-  posts?: number;
-  trendId: number;
+  title: string;
+  count?: number;
 }
 
 type TrendProps = {
@@ -15,14 +14,14 @@ type TrendProps = {
 
 const Trend = ({ locale, trend }: TrendProps) => {
   return (
-    <Link href={`/search?q=${trend.name}`}>
+    <Link href={`/search?q=${encodeURIComponent(trend.title)}`}>
       {/* biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation> */}
       <div className={ve.wrapper} tabIndex={0}>
         <div className={ve.header}>
           <div>{locale}에서 트렌드 중</div>
         </div>
-        <div className={ve.trendName}>{trend.name}</div>
-        {trend.posts && <div>{trend.posts.toLocaleString()} posts</div>}
+        <div className={ve.trendName}>{trend.title}</div>
+        {trend.count && <div>{trend.count.toLocaleString()} posts</div>}
       </div>
     </Link>
   );

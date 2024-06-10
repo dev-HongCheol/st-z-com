@@ -12,6 +12,7 @@ const getSinglePost: QueryFunction<Post, [string, string]> = async ({
 				tags: ["posts", username],
 			},
 			cache: "no-store",
+			credentials: "include",
 		},
 	);
 	if (!res.ok) {

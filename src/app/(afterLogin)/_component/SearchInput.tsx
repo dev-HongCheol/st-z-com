@@ -1,6 +1,6 @@
 "use client";
 import type React from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ve from "./searchInput.css";
 import Search from "@/components/icons/Search";
 import { useRouter } from "next/navigation";
@@ -22,6 +22,10 @@ const SearchInput = ({ q }: SearchInputProps) => {
       router.push(`/search?q=${searchInputRef.current?.value}`);
     }
   };
+
+  useEffect(() => {
+    if (searchInputRef.current && q) searchInputRef.current.value = q;
+  }, [q]);
 
   return (
     <div

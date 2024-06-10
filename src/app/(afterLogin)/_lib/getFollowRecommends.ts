@@ -6,6 +6,7 @@ const getFollowRecommends = async () => {
 				tags: ["users", "followRecommends"],
 			},
 			cache: "no-store",
+			credentials: "include",
 		},
 	);
 	if (!res.ok) {
