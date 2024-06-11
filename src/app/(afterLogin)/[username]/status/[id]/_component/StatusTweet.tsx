@@ -69,7 +69,7 @@ const StatusTweet = ({ userId, isWhite }: StatusTweetProps) => {
             {dayjs(post.createAt).format("A h:mm · YYYY년 M월 D일")}
           </div>
 
-          <ActionButtons />
+          <ActionButtons post={post} />
         </div>
       </div>
     </div>

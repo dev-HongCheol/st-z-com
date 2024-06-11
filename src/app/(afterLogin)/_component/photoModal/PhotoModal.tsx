@@ -65,7 +65,7 @@ const PhotoModal = ({ userId }: PhotoModalProps) => {
             )}
           </div>
           <div className={ve.actionButtonsWrapper}>
-            <ActionButtons isWhite />
+            <ActionButtons isWhite post={photoPost} />
           </div>
         </div>
         {/* tweet */}

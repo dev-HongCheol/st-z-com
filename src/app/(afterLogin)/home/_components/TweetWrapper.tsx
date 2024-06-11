@@ -7,6 +7,10 @@ export interface Image {
   link: string;
 }
 
+interface UserId {
+  userId: string;
+}
+
 export interface Post {
   content: string;
   postId: number;
@@ -17,6 +21,14 @@ export interface Post {
   };
   createAt: Date;
   Images: Image[];
+  Hearts: UserId[];
+  Reports: UserId[];
+  Comments: UserId[];
+  _count: {
+    Hearts: number;
+    Reports: number;
+    Comments: number;
+  };
 }
 
 interface TweetWrapperProps {
@@ -31,7 +43,8 @@ const TweetWrapper = ({ children, post }: TweetWrapperProps) => {
     router.push(`/${post.User.id}/status/${post.postId}`);
 
   return (
-    <article onClickCapture={() => handleDetailTweet(post)}>{children}</article>
+    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+    <article onClick={() => handleDetailTweet(post)}>{children}</article>
   );
 };
 

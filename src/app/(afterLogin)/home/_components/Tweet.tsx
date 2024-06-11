@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import ko from "dayjs/locale/ko";
 import TweetWrapper, { type Post } from "./TweetWrapper";
-import { faker } from "@faker-js/faker";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 
 dayjs.extend(relativeTime);
@@ -86,7 +85,7 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
             ))}
           </div>
 
-          <ActionButtons isWhite={isPhoto} />
+          <ActionButtons isWhite={isPhoto} post={post} />
         </div>
       </div>
     </TweetWrapper>
