@@ -22,11 +22,11 @@ export interface Post {
   createAt: Date;
   Images: Image[];
   Hearts: UserId[];
-  Reports: UserId[];
+  Reposts: UserId[];
   Comments: UserId[];
   _count: {
     Hearts: number;
-    Reports: number;
+    Reposts: number;
     Comments: number;
   };
 }

@@ -8,10 +8,14 @@ const button = style({
   flex: 1,
   width: 40,
   height: 40,
+  display: "flex",
+  alignItems: "center",
 });
 
 const widthAuto = style({
   width: "auto !important",
+  padding: "0 !important",
+  marginRight: "0.2rem",
 });
 
 const vx = {
