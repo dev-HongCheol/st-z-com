@@ -104,7 +104,6 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
       setActionButtonQueryData("Hearts", "plus");
     },
     onError() {
-      console.log("111");
       setActionButtonQueryData("Hearts", "minus");
     },
   });

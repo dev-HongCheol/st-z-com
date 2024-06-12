@@ -12,7 +12,7 @@ const RecommendFollowList = () => {
     queryFn: getFollowRecommends,
     queryKey: ["users", "followRecommends"],
   });
-  console.log("🚀 _ RecommendFollowList _ followRecommends:", followRecommends);
+
   return (
     <div className={ve.wrapper}>
       <div className={ve.title}>

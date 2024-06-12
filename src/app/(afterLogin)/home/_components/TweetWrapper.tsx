@@ -7,7 +7,7 @@ export interface Image {
   link: string;
 }
 
-interface UserId {
+export interface UserId {
   userId: string;
 }
 
