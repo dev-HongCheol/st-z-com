@@ -11,16 +11,16 @@ const getSearchResult: QueryFunction<
 			pf?: string;
 			p?: string;
 		},
-	]
-> = async ({ queryKey }) => {
+	],
+	number
+> = async ({ queryKey, pageParam }) => {
 	const [_1, _2, searchParams] = queryKey;
-
 	const urlSearchParams = new URLSearchParams(searchParams);
 
 	const res = await fetch(
 		`${
 			process.env.NEXT_PUBLIC_BASE_URL
-		}/api/posts?${urlSearchParams.toString()}`,
+		}/api/posts?cursor=${pageParam}&${urlSearchParams.toString()}`,
 		{
 			next: {
 				tags: ["post", "search", urlSearchParams.get("q") || ""],

@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
 const wrapper = style({
-  width: 40,
-  height: 40,
-  borderRadius: "100%",
+	width: "40px",
+	height: "40px",
+	borderRadius: "100%",
 });
 
 const ve = { wrapper };

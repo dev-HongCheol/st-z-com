@@ -1,10 +1,11 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import { type InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
+import React, { useEffect, useMemo } from "react";
 import getSearchResult from "../_lib/getSearchResult";
 import Tweet from "../../home/_components/Tweet";
 import type { Post } from "../../home/_components/TweetWrapper";
+import { useInView } from "react-intersection-observer";
 
 interface SearchResultListProps {
   searchParams: {
@@ -15,10 +16,11 @@ interface SearchResultListProps {
 }
 
 const SearchResultList = ({ searchParams }: SearchResultListProps) => {
-  const { data: searchList } = useQuery<
+  const { inView, ref } = useInView();
+  const { data, hasNextPage, isFetching, fetchNextPage } = useInfiniteQuery<
     Post[],
     object,
-    Post[],
+    InfiniteData<Post[]>,
     [
       _: string,
       __: string,
@@ -27,12 +29,33 @@ const SearchResultList = ({ searchParams }: SearchResultListProps) => {
         pf?: string;
         p?: string;
       }
-    ]
+    ],
+    number
   >({
     queryKey: ["post", "search", searchParams],
     queryFn: getSearchResult,
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.at(-1)?.postId,
   });
-  return searchList?.map((tweet) => <Tweet post={tweet} key={tweet.postId} />);
+
+  const searchList = useMemo(() => {
+    if (data) return data.pages.flat();
+  }, [data]);
+
+  useEffect(() => {
+    if (inView && !isFetching && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, inView, isFetching]);
+
+  return (
+    <>
+      {searchList?.map((tweet) => (
+        <Tweet post={tweet} key={tweet.postId} />
+      ))}
+      <div ref={ref} />
+    </>
+  );
 };
 
 export default SearchResultList;

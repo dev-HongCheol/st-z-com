@@ -11,13 +11,13 @@ import { deleteFollow, postFollow } from "../_lib/follow";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
 import classNames from "classnames";
-const cx = classNames.bind(ve);
 
 type RecommendFollowProps = {
   user: User;
 };
 
 const RecommendFollow = ({ user }: RecommendFollowProps) => {
+  const cx = classNames.bind(ve);
   // console.log("🚀 _ RecommendFollow _ user:", user);
   const { data: session } = useSession();
   const queryClient = useQueryClient();
@@ -88,10 +88,10 @@ const RecommendFollow = ({ user }: RecommendFollowProps) => {
         <Avatar src={user.image} nickName={user.nickName} id={user.id} />
         <Button
           variant="outlined"
-          className={cx(ve.button, isFollowed ? ve.button1 : "")}
+          className={cx(ve.button, isFollowed && ve.button1)}
           onClick={(event: React.MouseEvent) => handleFollow(event, user.id)}
         >
-          {isFollowed ? "언팔로" : "팔로우"}
+          {isFollowed ? "팔로잉" : "팔로우"}
         </Button>
       </div>
     </Link>

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import ve from "./tweet.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,6 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import ko from "dayjs/locale/ko";
 import TweetWrapper, { type Post } from "./TweetWrapper";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
+import classNames from "classnames";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
@@ -18,6 +19,7 @@ interface TweetProps {
 }
 
 const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
+  const cx = classNames.bind(ve);
   const getImageCss = (imageLength: number, index: number) => {
     switch (imageLength) {
       case 1: {
@@ -40,12 +42,18 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
     if (imageLength === 3 && index === 0) return ve.image3Grid;
     return "";
   };
+
+  const handleLinkStopPropagation = (event: React.MouseEvent) => {
+    event.stopPropagation();
+  };
   return (
     <TweetWrapper post={post}>
       <div
-        className={`${ve.wrapper} ${isPhoto && ve.colorWhite} ${
+        className={cx(
+          ve.wrapper,
+          isPhoto && ve.colorWhite,
           isNoneBorder && ve.noneBorder
-        }`}
+        )}
       >
         <div className={ve.avatar}>
           <Image src={post.User.image} alt="profile" width={40} height={40} />
@@ -54,10 +62,21 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
           <div className={ve.tweetUserWrapper}>
             <div className={ve.tweetInfo}>
               <div className={ve.userName}>
-                <Link href={`/${post.User.id}`}>{post.User.nickname}</Link>
+                <Link
+                  href={`/${post.User.id}`}
+                  passHref
+                  onClick={handleLinkStopPropagation}
+                >
+                  {post.User.nickname}
+                </Link>
               </div>
               <div className={ve.userId}>
-                <Link href={`/${post.User.id}`}>@{post.User.id}</Link>
+                <Link
+                  href={`/${post.User.id}`}
+                  onClick={handleLinkStopPropagation}
+                >
+                  @{post.User.id}
+                </Link>
               </div>
 
               <span className={ve.dot}>·</span>
@@ -71,8 +90,8 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
               <Link
                 key={image.imageId}
                 href={`/${post.User.id}/status/${post.postId}/photo/${image.imageId}`}
-                scroll={false}
                 className={get3GridImage(post.Images.length, index)}
+                onClick={handleLinkStopPropagation}
               >
                 <div
                   className={`${getImageCss(post.Images.length, index)} ${
