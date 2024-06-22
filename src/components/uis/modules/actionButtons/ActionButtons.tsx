@@ -19,6 +19,7 @@ import {
 import type { Post } from "@/app/(afterLogin)/home/_components/TweetWrapper";
 import { useSession } from "next-auth/react";
 import { useMemo } from "react";
+import { usePathname } from "next/navigation";
 
 interface ActionButtonsProps {
   isWhite?: boolean;
@@ -26,6 +27,7 @@ interface ActionButtonsProps {
 }
 
 const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const { data: session } = useSession();
 
@@ -49,8 +51,18 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
     const queryKeys = queryCache.getAll().map((cache) => cache.queryKey);
     let posts: Post | InfiniteData<Post[]> | undefined;
     if (!queryKeys) return;
+    const isHome = pathname === "/home";
+
     for (const queryKey of queryKeys) {
-      if (queryKey[0] === "tweet") {
+      if (isHome && queryKey[0] === "tweet") {
+        posts = queryClient.getQueryData(queryKey);
+        return { posts, queryKey };
+      }
+      if (
+        !isHome &&
+        queryKey[1] === pathname.substring(1) &&
+        queryKey[2] === "getUserPosts"
+      ) {
         posts = queryClient.getQueryData(queryKey);
         return { posts, queryKey };
       }
@@ -81,6 +93,7 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
       if (!newCurrentPost) return;
       const userId = session?.user.id;
       const button = newCurrentPost?.[buttonType];
+      console.log("🚀 _ ActionButtons _ posts:", posts);
       if (userId) {
         if (toggleType === "plus") {
           button.push({ userId });
@@ -94,6 +107,8 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
       newCurrentPost._count[buttonType] =
         newCurrentPost?._count[buttonType] + (toggleType === "plus" ? 1 : -1);
       queryClient.setQueryData(queryKey, newPosts);
+    } else {
+      console.log("check point");
     }
   };
 
