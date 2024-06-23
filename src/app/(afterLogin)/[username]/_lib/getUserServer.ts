@@ -1,7 +1,10 @@
 import type { User } from "@/types/User";
 import type { QueryFunction } from "@tanstack/react-query";
+import { cookies } from "next/headers";
 
-const getUser: QueryFunction<User, [string, string]> = async ({ queryKey }) => {
+const getUserServer: QueryFunction<User, [string, string]> = async ({
+	queryKey,
+}) => {
 	const [_, username] = queryKey;
 	console.log(
 		"🚀 _ getUser :",
@@ -15,6 +18,7 @@ const getUser: QueryFunction<User, [string, string]> = async ({ queryKey }) => {
 			},
 			cache: "no-store",
 			credentials: "include",
+			headers: { Cookie: cookies().toString() },
 		},
 	);
 	if (!res.ok) {
@@ -23,4 +27,4 @@ const getUser: QueryFunction<User, [string, string]> = async ({ queryKey }) => {
 	return res.json();
 };
 
-export default getUser;
+export default getUserServer;

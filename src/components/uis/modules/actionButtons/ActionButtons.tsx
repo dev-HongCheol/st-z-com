@@ -93,7 +93,7 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
       if (!newCurrentPost) return;
       const userId = session?.user.id;
       const button = newCurrentPost?.[buttonType];
-      console.log("🚀 _ ActionButtons _ posts:", posts);
+
       if (userId) {
         if (toggleType === "plus") {
           button.push({ userId });

@@ -5,66 +5,56 @@ import ve from "./userProfile.css";
 import Button from "@/components/uis/atoms/Button";
 import type { User } from "@/types/User";
 import { useSession } from "next-auth/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteFollow, postFollow } from "../../_lib/follow";
+import getUser from "../_lib/getUser";
+import useFollow from "../../_hooks/useFollowToggle";
 
 interface UserProfileProps {
   profile: User;
+  loginUserId: string | undefined;
 }
 
-const UserProfile = ({ profile }: UserProfileProps) => {
+const UserProfile = ({ profile, loginUserId }: UserProfileProps) => {
   const { data: session } = useSession();
-  const isFollowed = useMemo(() => {
-    return !!profile.Followers?.find(
-      (follower) => follower.userId === session?.user.id
-    );
-  }, [session?.user.id, profile.Followers]);
+  const { setFollowQueryData, setUnFollowQueryData } = useFollow(
+    profile.id,
+    loginUserId
+  );
   const queryClient = useQueryClient();
+
+  const { data } = useQuery({
+    queryFn: getUser,
+    queryKey: ["users", profile.id],
+  });
+
+  const userQueryData: User | undefined = queryClient.getQueryData([
+    "users",
+    profile.id,
+  ]);
+
+  const isFollowed = useMemo(() => {
+    if (userQueryData)
+      return !!userQueryData.Followers.find(
+        (follow) => follow.id === session?.user.id
+      );
+  }, [userQueryData, session?.user.id]);
 
   const followMutation = useMutation({
     mutationFn: postFollow,
     onMutate() {
-      console.log(111);
-      const profileQueryData: User | undefined = queryClient.getQueryData([
-        "user",
-        profile.id,
-      ]);
-
-      const newProfileQueryData = structuredClone(profileQueryData);
-      console.log("🚀 _ onMutate _ newProfileQueryData:", newProfileQueryData);
-      if (!newProfileQueryData) return;
-
-      newProfileQueryData?.Followers.push({
-        userId: session?.user.id as string,
-      });
-      newProfileQueryData._count.Followers =
-        newProfileQueryData._count.Followers + 1;
-      queryClient.setQueryData(["user", profile.id], newProfileQueryData);
+      setFollowQueryData();
     },
   });
 
   const unFollowMutation = useMutation({
     mutationFn: deleteFollow,
     onMutate() {
-      const profileQueryData: User | undefined = queryClient.getQueryData([
-        "user",
-        profile.id,
-      ]);
-      const newProfileQueryData = structuredClone(profileQueryData);
-      if (!newProfileQueryData) return;
-
-      newProfileQueryData.Followers = newProfileQueryData?.Followers.filter(
-        (follow) => follow.userId !== session?.user.id
-      );
-
-      newProfileQueryData._count.Followers =
-        newProfileQueryData._count.Followers - 1;
-      queryClient.setQueryData(["user", profile.id], newProfileQueryData);
+      setUnFollowQueryData();
     },
   });
 
   const handleToggleFollow = () => {
-    console.log("🚀 _ handleToggleFollow _ isFollowed:", isFollowed);
     isFollowed
       ? unFollowMutation.mutate(profile.id)
       : followMutation.mutate(profile.id);
@@ -85,9 +75,9 @@ const UserProfile = ({ profile }: UserProfileProps) => {
       <div className={ve.profileWrapper}>
         <div className={ve.profileSettingButtonWrapper}>
           {/* FIXME:배경색이 없는 버튼 구현 필요. */}
-          <Button className={ve.profileSettingButton}>프로필 설정하기</Button>
-
-          {profile.id !== session?.user.id && (
+          {profile.id === session?.user.id ? (
+            <Button className={ve.profileSettingButton}>프로필 설정하기</Button>
+          ) : (
             <Button
               className={ve.profileSettingButton}
               onClick={handleToggleFollow}

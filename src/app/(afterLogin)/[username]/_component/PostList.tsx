@@ -26,11 +26,11 @@ const PostList = ({ username }: PostListProps) => {
     [string, string, string],
     number
   >({
-    queryKey: ["user", username, "getUserPosts"],
+    queryKey: ["users", username, "getUserPosts"],
     queryFn: getUserPosts,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.at(-1)?.postId,
-    enabled: !!queryClient.getQueryData(["user", username]),
+    enabled: !!queryClient.getQueryData(["users", username]),
   });
 
   const posts = useMemo(() => {

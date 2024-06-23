@@ -1,10 +1,13 @@
-import type { UserId } from "@/app/(afterLogin)/home/_components/TweetWrapper";
+interface Follower {
+	id?: string | undefined;
+	userId: string;
+}
 
 export type User = {
 	id: string;
 	nickName: string;
 	image: string;
-	Followers: UserId[];
+	Followers: Follower[];
 	_count: {
 		Followers: number;
 		Followings: number;

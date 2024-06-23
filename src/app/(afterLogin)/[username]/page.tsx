@@ -5,14 +5,16 @@ import UserProfile from "./_component/UserProfile";
 import ProfileTab from "./_component/ProfileTab";
 import {
   HydrationBoundary,
+  type InfiniteData,
   QueryClient,
   dehydrate,
 } from "@tanstack/react-query";
-import getUser from "./_lib/getUser";
 import type { User } from "@/types/User";
 import type { Post } from "../home/_components/TweetWrapper";
 import getUserPosts from "./_lib/getUserPosts";
 import PostList from "./_component/PostList";
+import getUserServer from "./_lib/getUserServer";
+import { auth } from "@/auth";
 
 interface ProfilePageProps {
   params: {
@@ -21,6 +23,7 @@ interface ProfilePageProps {
 }
 
 const ProfilePage = async ({ params }: ProfilePageProps) => {
+  const session = await auth();
   const queryClient = new QueryClient();
   let profile: User | undefined;
   try {
@@ -30,21 +33,23 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
       User,
       [string, string]
     >({
-      queryKey: ["user", params.username],
-      queryFn: getUser,
+      queryKey: ["users", params.username],
+      queryFn: getUserServer,
     });
   } catch (e) {
-    console.log(e);
+    console.log("getUser", e);
   }
 
-  await queryClient.prefetchQuery<
+  await queryClient.prefetchInfiniteQuery<
     Post[],
     object,
-    Post[],
-    [string, string, string]
+    InfiniteData<Post[]>,
+    [string, string, string],
+    number
   >({
     queryFn: getUserPosts,
-    queryKey: ["user", params.username, "getUserPosts"],
+    initialPageParam: 0,
+    queryKey: ["users", params.username, "getUserPosts"],
   });
   const dehydratedState = dehydrate(queryClient);
 
@@ -78,7 +83,7 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
           </div>
         </div>
 
-        <UserProfile profile={profile} />
+        <UserProfile profile={profile} loginUserId={session?.user.id} />
 
         <ProfileTab />
         <PostList username={params.username} />
