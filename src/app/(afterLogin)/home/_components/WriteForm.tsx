@@ -68,6 +68,11 @@ const WriteForm = ({ user }: WriteFormProps) => {
         if (formRef.current) formRef.current.reset();
 
         const newPost: Post = await data.json();
+        newPost._count = {
+          Comments: 0,
+          Hearts: 0,
+          Reposts: 0,
+        };
         queryClient.setQueryData(
           ["tweet", "recommends"],
           (pre: InfiniteData<Post[]>) => {

@@ -9,17 +9,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteFollow, postFollow } from "../../_lib/follow";
 import getUser from "../_lib/getUser";
 import useFollow from "../../_hooks/useFollowToggle";
+import type { Session } from "next-auth";
 
 interface UserProfileProps {
   profile: User;
-  loginUserId: string | undefined;
+  session: Session | null;
 }
 
-const UserProfile = ({ profile, loginUserId }: UserProfileProps) => {
-  const { data: session } = useSession();
+const UserProfile = ({ profile, session }: UserProfileProps) => {
   const { setFollowQueryData, setUnFollowQueryData } = useFollow(
     profile.id,
-    loginUserId
+    session?.user.id
   );
   const queryClient = useQueryClient();
 

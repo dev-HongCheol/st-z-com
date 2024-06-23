@@ -79,11 +79,11 @@ const ProfilePage = async ({ params }: ProfilePageProps) => {
             <span className={ve.metaName}>{profile?.nickName}</span>
             <br />
             {/* FIXME: */}
-            <span className={ve.posts}>{99} 게시물</span>
+            {/* <span className={ve.posts}>{99} 게시물</span> */}
           </div>
         </div>
 
-        <UserProfile profile={profile} loginUserId={session?.user.id} />
+        <UserProfile profile={profile} session={session} />
 
         <ProfileTab />
         <PostList username={params.username} />
