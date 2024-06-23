@@ -6,6 +6,8 @@ import ve from "./logoutButton.css";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import type { User } from "next-auth";
+import { useQueryClient } from "@tanstack/react-query";
+import { cookies } from "next/headers";
 
 interface LogoutButtonProps {
   user: User;
@@ -13,9 +15,16 @@ interface LogoutButtonProps {
 
 const LogoutButton = ({ user }: LogoutButtonProps) => {
   const router = useRouter();
-  const handleLogout = () => {
+  const queryClient = useQueryClient();
+
+  const handleLogout = async () => {
     signOut({
       redirect: false,
+    });
+    queryClient.clear();
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
+      method: "post",
+      credentials: "include",
     });
     router.replace("/");
   };
