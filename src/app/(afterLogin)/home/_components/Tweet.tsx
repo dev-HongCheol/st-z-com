@@ -8,6 +8,7 @@ import ko from "dayjs/locale/ko";
 import TweetWrapper, { type Post } from "./TweetWrapper";
 import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 import classNames from "classnames";
+import ReTweetIcon from "@/components/icons/ReTweet";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
@@ -46,8 +47,15 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
   const handleLinkStopPropagation = (event: React.MouseEvent) => {
     event.stopPropagation();
   };
+
+  const postData = post.Original ? post.Original : post;
   return (
-    <TweetWrapper post={post}>
+    <TweetWrapper post={postData}>
+      {post.Original && (
+        <div className={ve.rePostWrapper}>
+          <ReTweetIcon /> <p>재게시했습니다.</p>
+        </div>
+      )}
       <div
         className={cx(
           ve.wrapper,
@@ -56,45 +64,52 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
         )}
       >
         <div className={ve.avatar}>
-          <Image src={post.User.image} alt="profile" width={40} height={40} />
+          <Image
+            src={postData.User.image}
+            alt="profile"
+            width={40}
+            height={40}
+          />
         </div>
         <div className={ve.tweetContent}>
           <div className={ve.tweetUserWrapper}>
             <div className={ve.tweetInfo}>
               <div className={ve.userName}>
                 <Link
-                  href={`/${post.User.id}`}
+                  href={`/${postData.User.id}`}
                   passHref
                   onClick={handleLinkStopPropagation}
                 >
-                  {post.User.nickname}
+                  {postData.User.nickname}
                 </Link>
               </div>
               <div className={ve.userId}>
                 <Link
-                  href={`/${post.User.id}`}
+                  href={`/${postData.User.id}`}
                   onClick={handleLinkStopPropagation}
                 >
-                  @{post.User.id}
+                  @{postData.User.id}
                 </Link>
               </div>
 
               <span className={ve.dot}>·</span>
-              <div className={ve.userId}>{dayjs(post.createAt).fromNow()}</div>
+              <div className={ve.userId}>
+                {dayjs(postData.createAt).fromNow()}
+              </div>
             </div>
           </div>
           {/* content */}
-          <div>{post.content}</div>
+          <div>{postData.content}</div>
           <div className={ve.imageWrapper}>
-            {post.Images.map((image, index) => (
+            {postData.Images.map((image, index) => (
               <Link
                 key={image.imageId}
-                href={`/${post.User.id}/status/${post.postId}/photo/${image.imageId}`}
-                className={get3GridImage(post.Images.length, index)}
+                href={`/${postData.User.id}/status/${postData.postId}/photo/${image.imageId}`}
+                className={get3GridImage(postData.Images.length, index)}
                 onClick={handleLinkStopPropagation}
               >
                 <div
-                  className={`${getImageCss(post.Images.length, index)} ${
+                  className={`${getImageCss(postData.Images.length, index)} ${
                     isPhoto ? ve.statusImage : ""
                   }`}
                 >
@@ -104,7 +119,7 @@ const Tweet = ({ isPhoto, post, isNoneBorder }: TweetProps) => {
             ))}
           </div>
 
-          <ActionButtons isWhite={isPhoto} post={post} />
+          <ActionButtons isWhite={isPhoto} post={postData} />
         </div>
       </div>
     </TweetWrapper>

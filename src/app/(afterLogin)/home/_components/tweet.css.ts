@@ -126,6 +126,16 @@ const noneBorder = style({
 	borderRight: "none",
 });
 
+const rePostWrapper = style({
+	paddingLeft: "1rem",
+	borderLeft: "1px solid #e3e3e3",
+	borderRight: "1px solid #e3e3e3",
+	color: "gray",
+	display: "flex",
+	alignItems: "center",
+	columnGap: "0.2rem",
+});
+
 const ve = {
 	wrapper,
 	avatar,
@@ -149,5 +159,6 @@ const ve = {
 	widthAuto,
 	colorWhite,
 	noneBorder,
+	rePostWrapper,
 };
 export default ve;
