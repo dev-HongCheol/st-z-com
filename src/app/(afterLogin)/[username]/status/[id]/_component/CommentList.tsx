@@ -6,15 +6,15 @@ import getPostComments from "../_lib/getPostComments";
 import Tweet from "@/app/(afterLogin)/home/_components/Tweet";
 
 interface CommentListProps {
-  userId: string;
+  postId: string;
 }
 
-const CommentList = ({ userId }: CommentListProps) => {
+const CommentList = ({ postId }: CommentListProps) => {
   const queryClient = useQueryClient();
-  const post = queryClient.getQueryData(["posts", userId]);
+  const post = queryClient.getQueryData(["posts", postId]);
   const { data: comments } = useQuery({
     queryFn: getPostComments,
-    queryKey: ["posts", userId, "comments"],
+    queryKey: ["posts", postId, "comments"],
     enabled: !!post,
   });
 

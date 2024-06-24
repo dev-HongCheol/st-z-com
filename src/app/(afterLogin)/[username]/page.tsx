@@ -22,6 +22,13 @@ interface ProfilePageProps {
   };
 }
 
+export const generateMetadata = async ({ params }: ProfilePageProps) => {
+  return {
+    title: `z. profile ${params.username}`,
+    description: "",
+  };
+};
+
 const ProfilePage = async ({ params }: ProfilePageProps) => {
   const session = await auth();
   const queryClient = new QueryClient();

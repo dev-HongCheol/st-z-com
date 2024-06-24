@@ -35,7 +35,7 @@ const UserProfile = ({ profile, session }: UserProfileProps) => {
 
   const isFollowed = useMemo(() => {
     if (userQueryData)
-      return !!userQueryData.Followers.find(
+      return !!userQueryData.Followers?.find(
         (follow) => follow.id === session?.user.id
       );
   }, [userQueryData, session?.user.id]);

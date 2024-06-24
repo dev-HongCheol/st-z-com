@@ -14,18 +14,19 @@ import CommentList from "./_component/CommentList";
 interface SinglePostPageProps {
   params: {
     username: string;
+    id: string;
   };
 }
 const SinglePostPage = ({ params }: SinglePostPageProps) => {
   const queryClient = new QueryClient();
   queryClient.prefetchQuery({
     queryFn: getSinglePost,
-    queryKey: ["posts", params.username],
+    queryKey: ["posts", params.id],
   });
 
   queryClient.prefetchQuery({
     queryFn: getPostComments,
-    queryKey: ["posts", params.username, "comments"],
+    queryKey: ["posts", params.id, "comments"],
   });
 
   const dehydratedState = dehydrate(queryClient);
@@ -41,9 +42,9 @@ const SinglePostPage = ({ params }: SinglePostPageProps) => {
         </div>
 
         <article className={ve.articleWrapper}>
-          <StatusTweet userId={params.username} />
+          <StatusTweet userId={params.username} postId={params.id} />
           <CommentForm />
-          <CommentList userId={params.username} />
+          <CommentList postId={params.id} />
         </article>
       </article>
     </HydrationBoundary>
