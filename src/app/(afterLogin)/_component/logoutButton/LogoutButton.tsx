@@ -3,11 +3,10 @@ import React from "react";
 import Button from "@/components/uis/atoms/Button";
 import Avatar from "@/components/uis/avatar/Avatar";
 import ve from "./logoutButton.css";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import type { User } from "next-auth";
 import { useQueryClient } from "@tanstack/react-query";
-import { cookies } from "next/headers";
 
 interface LogoutButtonProps {
   user: User;

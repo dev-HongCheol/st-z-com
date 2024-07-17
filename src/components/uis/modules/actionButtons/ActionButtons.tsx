@@ -18,8 +18,9 @@ import {
 } from "@tanstack/react-query";
 import type { Post } from "@/app/(afterLogin)/home/_components/TweetWrapper";
 import { useSession } from "next-auth/react";
-import { useMemo } from "react";
+import { type MouseEvent, useMemo } from "react";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface ActionButtonsProps {
   isWhite?: boolean;
@@ -27,6 +28,7 @@ interface ActionButtonsProps {
 }
 
 const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
+  const router = useRouter();
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const { data: session } = useSession();
@@ -180,10 +182,21 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
     }
   };
 
+  const handleShowCommentModal = (event: MouseEvent, postId: number) => {
+    event.stopPropagation();
+    router.push("/compose/tweet");
+  };
+
   return (
     <div className={vx.buttonWrapper}>
       <div className={vx.button}>
-        <Button variant="text" className={vx.widthAuto}>
+        <Button
+          variant="text"
+          className={vx.widthAuto}
+          onClick={(event: MouseEvent) =>
+            handleShowCommentModal(event, post.postId)
+          }
+        >
           <Comment
             style={{
               fill: isClickedComment ? "orange" : isWhite ? "white" : "initial",

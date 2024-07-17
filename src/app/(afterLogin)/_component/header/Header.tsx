@@ -4,7 +4,7 @@ import React from "react";
 import MenuList from "./MenuList";
 import { header, logoImage, navWrapper } from "./header.css";
 import Button from "@/components/uis/atoms/Button";
-import LogoutButton from "../composeTweet/logoutButton/LogoutButton";
+import LogoutButton from "../logoutButton/LogoutButton";
 import { auth } from "@/auth";
 
 const Header = async () => {

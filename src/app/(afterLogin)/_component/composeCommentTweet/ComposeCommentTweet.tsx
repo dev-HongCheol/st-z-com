@@ -5,23 +5,38 @@ import Modal from "@/components/uis/modal/Modal";
 import closeBtnImg from "@/assets/closeBtn.svg";
 import Image from "next/image";
 import Button from "@/components/uis/atoms/Button";
-import ve from "./composeTweet.css";
+import ve from "./composeCommentTweet.css";
 import Link from "next/link";
 import MediaUpload from "@/components/icons/MediaUpload";
 import GifUpload from "@/components/icons/GifUpload";
 import { useRouter } from "next/navigation";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import ko from "dayjs/locale/ko";
+dayjs.extend(relativeTime);
+dayjs.locale(ko);
+import cx from "classnames";
+import type { Post } from "../../home/_components/TweetWrapper";
 
 // FIXME: TESTCODE
 const me = {
   src: "/default_profile_normal.png",
 };
 
-const ComposeTweet = () => {
+interface ComposeCommentTweetProps {
+  post: Post;
+}
+
+const ComposeCommentTweet = ({ post }: ComposeCommentTweetProps) => {
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const mediaInput = useRef<HTMLInputElement>(null);
   const handleUploadMedia = () => {
     mediaInput.current?.click();
+  };
+
+  const handleLinkStopPropagation = (event: React.MouseEvent) => {
+    event.stopPropagation();
   };
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -56,6 +71,47 @@ const ComposeTweet = () => {
         <Button variant="text" className={ve.closeBtn} onClick={onClose}>
           <Image src={closeBtnImg} alt="close btn" />
         </Button>
+      </div>
+
+      {/* post */}
+      <div
+        className={cx(
+          ve.wrapper
+          // isPhoto && ve.colorWhite,
+          // isNoneBorder && ve.noneBorder
+        )}
+      >
+        <div className={ve.avatar}>
+          <Image src={post.User.image} alt="profile" width={40} height={40} />
+        </div>
+        <div className={ve.tweetContent}>
+          <div className={ve.tweetUserWrapper}>
+            <div className={ve.tweetInfo}>
+              <div className={ve.userName}>
+                <Link
+                  href={`/${post.User.id}`}
+                  passHref
+                  onClick={handleLinkStopPropagation}
+                >
+                  {post.User.nickname}
+                </Link>
+              </div>
+              <div className={ve.userId}>
+                <Link
+                  href={`/${post.User.id}`}
+                  onClick={handleLinkStopPropagation}
+                >
+                  @{post.User.id}
+                </Link>
+              </div>
+
+              <span className={ve.dot}>·</span>
+              <div className={ve.userId}>{dayjs(post.createAt).fromNow()}</div>
+            </div>
+          </div>
+          {/* content */}
+          <div>{post.content}</div>
+        </div>
       </div>
 
       <form className={ve.tweetForm} onSubmit={onSubmit}>
@@ -119,4 +175,4 @@ const ComposeTweet = () => {
   );
 };
 
-export default ComposeTweet;
+export default ComposeCommentTweet;
