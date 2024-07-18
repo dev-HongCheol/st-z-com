@@ -72,6 +72,40 @@ const contentUploadBtn = style({
   marginRight: "0.3rem",
 });
 
+const commentLeftWrapper = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+});
+
+const line = style({
+  flexGrow: 1,
+  background: "#e3e3e3",
+  width: 3,
+});
+
+const commentRightWrapper = style({
+  flexGrow: 1,
+});
+
+const commentUser = style({
+  display: "flex",
+  marginBottom: "0.2rem",
+});
+
+const commentId = style({
+  margin: "0 0.5rem",
+  color: "gray",
+});
+
+const commentNickname = style({
+  fontWeight: "bold",
+});
+
+const commentContent = style({
+  // width: "min-content",
+});
+
 const ve = {
   modalWrapper,
   modalHeader,
@@ -87,6 +121,13 @@ const ve = {
   uploadContentBtnWrapper,
   submitButton,
   contentUploadBtn,
+  commentLeftWrapper,
+  line,
+  commentRightWrapper,
+  commentUser,
+  commentId,
+  commentNickname,
+  commentContent,
 };
 
 export default ve;

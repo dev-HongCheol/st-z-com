@@ -3,6 +3,7 @@ import { Inter, Noto_Sans_Gothic } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "@/components/providers/SessionProvider";
 import RqProvider from "@/components/providers/RqProvider";
+import { CounterStoreProvider } from "@/components/providers/ZustandProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={natoSans.className}>
         <SessionProvider>
-          <RqProvider>{children}</RqProvider>
+          <CounterStoreProvider>
+            <RqProvider>{children}</RqProvider>
+          </CounterStoreProvider>
         </SessionProvider>
       </body>
     </html>

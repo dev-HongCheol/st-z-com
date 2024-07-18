@@ -21,6 +21,7 @@ import { useSession } from "next-auth/react";
 import { type MouseEvent, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import cookie from "cookie";
 
 interface ActionButtonsProps {
   isWhite?: boolean;
@@ -182,9 +183,10 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
     }
   };
 
-  const handleShowCommentModal = (event: MouseEvent, postId: number) => {
+  const handleShowCommentModal = (event: MouseEvent, post: Post) => {
     event.stopPropagation();
     router.push("/compose/tweet");
+    sessionStorage.setItem("commentPost", JSON.stringify(post));
   };
 
   return (
@@ -193,9 +195,7 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
         <Button
           variant="text"
           className={vx.widthAuto}
-          onClick={(event: MouseEvent) =>
-            handleShowCommentModal(event, post.postId)
-          }
+          onClick={(event: MouseEvent) => handleShowCommentModal(event, post)}
         >
           <Comment
             style={{

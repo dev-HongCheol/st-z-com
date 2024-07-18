@@ -17,17 +17,14 @@ dayjs.extend(relativeTime);
 dayjs.locale(ko);
 import cx from "classnames";
 import type { Post } from "../../home/_components/TweetWrapper";
-
-// FIXME: TESTCODE
-const me = {
-  src: "/default_profile_normal.png",
-};
+import { useSession } from "next-auth/react";
 
 interface ComposeCommentTweetProps {
   post: Post;
 }
 
 const ComposeCommentTweet = ({ post }: ComposeCommentTweetProps) => {
+  const { data: session } = useSession();
   const router = useRouter();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const mediaInput = useRef<HTMLInputElement>(null);
@@ -118,7 +115,7 @@ const ComposeCommentTweet = ({ post }: ComposeCommentTweetProps) => {
         <div className={ve.contextWrapper}>
           <div className={ve.avatarImageWrapper}>
             <Image
-              src={me.src}
+              src={session?.user.image || ""}
               alt="profileImage"
               fill
               className={ve.avatarImage}
