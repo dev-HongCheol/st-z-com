@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import ve from "./photoModal.css";
 import Image from "next/image";
-import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 import CloseButton from "./CloseButton";
 import StatusTweet from "../../[username]/status/[id]/_component/StatusTweet";
 import CommentForm from "../../[username]/status/[id]/_component/CommentForm";
@@ -16,11 +15,18 @@ import {
 import getPhotoPost from "./_lib/getPhotoPost";
 import getPostComments from "../../[username]/status/[id]/_lib/getPostComments";
 import PhotoPostCommentsList from "./_component/PhotoPostCommentsList";
+import { useSession } from "next-auth/react";
+import type { Post } from "../../home/_components/TweetWrapper";
+import getSinglePost from "../../[username]/status/[id]/_lib/getSinglePost";
+import ActionButtons from "@/components/uis/modules/actionButtons/ActionButtons";
 
 type PhotoModalProps = {
   userId: string;
+  postId: string;
+  photoId: string;
 };
-const PhotoModal = ({ userId }: PhotoModalProps) => {
+const PhotoModal = ({ userId, postId, photoId }: PhotoModalProps) => {
+  const { data: session } = useSession();
   useEffect(() => {
     const body = document.querySelector("body");
     if (body) body.style.overflow = "hidden";
@@ -30,20 +36,22 @@ const PhotoModal = ({ userId }: PhotoModalProps) => {
     };
   }, []);
 
-  const { data: photoPost } = useQuery({
-    queryFn: getPhotoPost,
-    queryKey: ["posts", userId, "photo"],
+  const { data: post } = useQuery({
+    // queryFn: getPhotoPost,
+    // queryKey: ["posts", post.postId.toString(), "photo", photoId],
+    queryFn: getSinglePost,
+    queryKey: ["posts", postId],
   });
 
   const queryClient = new QueryClient();
   queryClient.prefetchQuery({
     queryFn: getPostComments,
-    queryKey: ["posts", userId, "comments"],
+    queryKey: ["posts", postId, "comments"],
   });
 
   const hydrateState = dehydrate(queryClient);
 
-  if (!photoPost) return null;
+  if (!post || !session) return null;
 
   return (
     <div className={ve.modal}>
@@ -54,9 +62,9 @@ const PhotoModal = ({ userId }: PhotoModalProps) => {
             <CloseButton />
           </div>
           <div className={ve.image}>
-            {photoPost.Images?.length && (
+            {post.Images?.length && (
               <Image
-                src={photoPost.Images[0].link}
+                src={post.Images[0].link}
                 alt=""
                 fill
                 priority
@@ -65,15 +73,15 @@ const PhotoModal = ({ userId }: PhotoModalProps) => {
             )}
           </div>
           <div className={ve.actionButtonsWrapper}>
-            <ActionButtons isWhite post={photoPost} />
+            <ActionButtons isWhite post={post} />
           </div>
         </div>
         {/* tweet */}
         <div className={ve.tweetWrapper}>
-          <StatusTweet isWhite userId={userId} />
-          <CommentForm isPhoto />
+          <StatusTweet isWhite userId={userId} postId={post.postId} />
+          <CommentForm isPhoto postId={post.postId} session={session} />
           <HydrationBoundary state={hydrateState}>
-            <PhotoPostCommentsList userId={userId} />
+            <PhotoPostCommentsList postId={post.postId} />
           </HydrationBoundary>
         </div>
       </div>

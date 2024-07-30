@@ -18,13 +18,13 @@ dayjs.locale(ko);
 interface StatusTweetProps {
   isWhite?: boolean;
   userId: string;
-  postId: string;
+  postId: number;
 }
 
 const StatusTweet = ({ isWhite, postId }: StatusTweetProps) => {
   const { data: post } = useQuery<Post, object, Post, [string, string]>({
     queryFn: getSinglePost,
-    queryKey: ["posts", postId],
+    queryKey: ["posts", postId.toString()],
   });
 
   const mutation = useMutation({

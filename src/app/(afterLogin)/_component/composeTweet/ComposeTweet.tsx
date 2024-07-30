@@ -15,7 +15,10 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import ko from "dayjs/locale/ko";
 import type { Session } from "next-auth";
 import type { Post } from "../../home/_components/TweetWrapper";
-import { getComments } from "../../compose/tweet/libs/getComments";
+import {
+  getComments,
+  postComments,
+} from "../../compose/tweet/libs/getComments";
 
 dayjs.extend(relativeTime);
 dayjs.locale(ko);
@@ -56,7 +59,7 @@ const ComposeTweet = ({ session }: ComposeTweetProps) => {
         }
       }
 
-      const res = await getComments(commentPost.postId, formData);
+      const res = await postComments(commentPost.postId, formData);
       if (res) {
         router.back();
       }

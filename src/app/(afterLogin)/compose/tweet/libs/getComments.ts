@@ -1,6 +1,6 @@
 import type { Post } from "@/app/(afterLogin)/home/_components/TweetWrapper";
 
-export const getComments = async (
+export const postComments = async (
   postId: number,
   comment: FormData
 ): Promise<Post> => {

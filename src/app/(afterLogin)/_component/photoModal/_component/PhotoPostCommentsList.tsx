@@ -4,12 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 interface PhotoPostCommentsListProps {
-  userId: string;
+  postId: number;
 }
-const PhotoPostCommentsList = ({ userId }: PhotoPostCommentsListProps) => {
+const PhotoPostCommentsList = ({ postId }: PhotoPostCommentsListProps) => {
   const { data: comments } = useQuery({
     queryFn: getPostComments,
-    queryKey: ["posts", userId, "comments"],
+    queryKey: ["posts", postId.toString(), "comments"],
   });
   return comments?.map((comment) => (
     <Tweet post={comment} isPhoto key={comment.postId} />

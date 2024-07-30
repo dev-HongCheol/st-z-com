@@ -9,17 +9,20 @@ import GifUpload from "@/components/icons/GifUpload";
 import { usePathname } from "next/navigation";
 import ve from "./commentForm.css";
 import { useSession } from "next-auth/react";
+import { postComments } from "@/app/(afterLogin)/compose/tweet/libs/getComments";
+import type { Session } from "next-auth";
 
 interface CommentFormProps {
   isPhoto?: boolean;
+  postId: number;
+  session: Session;
 }
 
-const CommentForm = ({ isPhoto }: CommentFormProps) => {
+const CommentForm = ({ isPhoto, postId, session }: CommentFormProps) => {
   const pathname = (usePathname() || "").split("/");
   const postUserId = pathname[1];
   const [isClickedTextarea, setIsClickedTextarea] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
   const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
 
   const mediaInput = useRef<HTMLInputElement>(null);
@@ -31,8 +34,23 @@ const CommentForm = ({ isPhoto }: CommentFormProps) => {
     setIsClickedTextarea(true);
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    console.log("handleSubmit");
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.stopPropagation();
+
+    if (!textareaRef.current || !mediaInput.current) return;
+    const content = textareaRef.current?.value;
+    const images = mediaInput.current?.files;
+
+    const formData = new FormData();
+    formData.append("content", content);
+
+    if (images && images?.length > 0) {
+      for (let i = 0; i < images.length; i++) {
+        formData.append("images", images[i]);
+      }
+    }
+
+    const res = await postComments(postId, formData);
   };
 
   function adjustTextareaHeight() {
@@ -46,8 +64,6 @@ const CommentForm = ({ isPhoto }: CommentFormProps) => {
   const onChangeTextarea = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIsSubmitDisabled(event.target.value.length === 0);
   };
-
-  const { data: session } = useSession();
 
   return (
     <>

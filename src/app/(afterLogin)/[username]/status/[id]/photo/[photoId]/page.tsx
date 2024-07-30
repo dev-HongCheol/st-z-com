@@ -4,14 +4,15 @@ import React from "react";
 interface PhotoPageProps {
   params: {
     username: string;
+    id: string;
+    photoId: string;
   };
 }
-
-const PhotoPage = ({ params }: PhotoPageProps) => {
-  const { username: userId } = params;
+const PhotoPage = async ({ params }: PhotoPageProps) => {
+  const { username: userId, id, photoId } = params;
   return (
     <>
-      <PhotoModal userId={userId} />
+      <PhotoModal userId={userId} photoId={photoId} postId={id} />
     </>
   );
 };

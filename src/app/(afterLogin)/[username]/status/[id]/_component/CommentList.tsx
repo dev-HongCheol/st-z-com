@@ -11,11 +11,10 @@ interface CommentListProps {
 
 const CommentList = ({ postId }: CommentListProps) => {
   const queryClient = useQueryClient();
-  const post = queryClient.getQueryData(["posts", postId]);
+
   const { data: comments } = useQuery({
     queryFn: getPostComments,
     queryKey: ["posts", postId, "comments"],
-    enabled: !!post,
   });
 
   return (
