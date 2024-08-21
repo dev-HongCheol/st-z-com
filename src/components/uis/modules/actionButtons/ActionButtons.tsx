@@ -203,7 +203,7 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
             }}
           />
         </Button>
-        {post._count.Comments !== 0 && post._count.Comments}
+        {post._count?.Comments && post._count.Comments !== 0}
       </div>
 
       <div className={vx.button}>
@@ -218,7 +218,7 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
             }}
           />
         </Button>
-        {post._count.Reposts !== 0 && post._count.Reposts}
+        {post._count?.Reposts && post._count.Reposts !== 0}
       </div>
 
       <div className={vx.button}>
@@ -233,7 +233,7 @@ const ActionButtons = ({ isWhite, post }: ActionButtonsProps) => {
             }}
           />
         </Button>
-        {post._count.Hearts !== 0 && post._count.Hearts}
+        {post._count?.Hearts && post._count.Hearts !== 0}
       </div>
 
       <div className={vx.button}>
