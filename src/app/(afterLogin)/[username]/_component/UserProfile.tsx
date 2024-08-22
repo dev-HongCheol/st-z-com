@@ -10,6 +10,7 @@ import { deleteFollow, postFollow } from "../../_lib/follow";
 import getUser from "../_lib/getUser";
 import useFollow from "../../_hooks/useFollowToggle";
 import type { Session } from "next-auth";
+import { useRouter } from "next/navigation";
 
 interface UserProfileProps {
   profile: User;
@@ -17,6 +18,7 @@ interface UserProfileProps {
 }
 
 const UserProfile = ({ profile, session }: UserProfileProps) => {
+  const router = useRouter();
   const { setFollowQueryData, setUnFollowQueryData } = useFollow(
     profile.id,
     session?.user.id
@@ -60,6 +62,12 @@ const UserProfile = ({ profile, session }: UserProfileProps) => {
       : followMutation.mutate(profile.id);
   };
 
+  const handleGotoMessage = (userId: string) => {
+    const messageId = [session?.user.id, userId].sort();
+
+    router.push(`/messages/${messageId.join("-")}`);
+  };
+
   return (
     <div>
       <div className={ve.garyBg}>
@@ -78,12 +86,20 @@ const UserProfile = ({ profile, session }: UserProfileProps) => {
           {profile.id === session?.user.id ? (
             <Button className={ve.profileSettingButton}>프로필 설정하기</Button>
           ) : (
-            <Button
-              className={ve.profileSettingButton}
-              onClick={handleToggleFollow}
-            >
-              {isFollowed ? "팔로잉" : "팔로우"}
-            </Button>
+            <>
+              <Button
+                className={ve.profileSettingButton}
+                onClick={() => handleGotoMessage(profile.id)}
+              >
+                Message
+              </Button>
+              <Button
+                className={ve.profileSettingButton}
+                onClick={handleToggleFollow}
+              >
+                {isFollowed ? "팔로잉" : "팔로우"}
+              </Button>
+            </>
           )}
         </div>
       </div>
