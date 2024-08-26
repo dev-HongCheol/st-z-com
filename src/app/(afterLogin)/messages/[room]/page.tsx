@@ -3,6 +3,7 @@ import { QueryClient } from "@tanstack/react-query";
 import React from "react";
 import getUser from "../../[username]/_lib/getUser";
 import ReceiveUserProfile from "./_components/ReceiveUserProfile";
+import MessageForm from "./_components/MessageForm";
 
 interface RoomPageProps {
   params: {
@@ -24,6 +25,7 @@ const RoomPage = async ({ params }: RoomPageProps) => {
   return (
     <div>
       <ReceiveUserProfile receiverId={receiverId} />
+      <MessageForm />
     </div>
   );
 };
